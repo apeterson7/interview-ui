@@ -1,28 +1,33 @@
-<div class="card my-5">
-  <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <!-- <th scope="col">#</th> -->
-          <th scope="col">Name</th>
-          <th scope="col">Type</th>
-          <th scope="col">Level</th>
-          <th scope="col">Text</th>
-          <th scope="col">Answer</th>
+<!-- <div *ngIf="selectedQuestion===null"> -->
+  <div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <!-- <th scope="col">#</th> -->
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Level</th>
+            <th scope="col">Text</th>
+            <th scope="col">Answer</th>
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let question of questions">
-          <!-- <td>{{ question.id }}</td> -->
-          <td>{{ question.name }}</td>
-          <td>{{ question.type }}</td>
-          <td>{{ question.level }}</td>
-          <td>{{ question.text }}</td>
-          <td>{{ question.answer }}</td>
-        </tr>
-      </tbody>
-    </table>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let question of questions" 
+          [class.selected]="question === selectedQuestion"
+          (click)="onSelect(question)">
+            <!-- <td>{{ question.id }}</td> -->
+            <td>{{ question.name }}</td>
+            <td>{{ question.type }}</td>
+            <td>{{ question.level }}</td>
+            <td>{{ (question.text.length > 50) ?(question.text | slice:0:50)+'...':question.answer }}</td>
+            <td>{{ (question.answer.length > 50) ? (question.answer | slice:0:50)+'...':question.answer }}</td>
+          </tr>
+        </tbody>
+      </table>    
+    </div>
   </div>
-</div>
+<!-- </div> -->
+<app-question-detail [question]="selectedQuestion"></app-question-detail>
 

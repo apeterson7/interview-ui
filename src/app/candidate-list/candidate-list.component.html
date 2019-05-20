@@ -1,0 +1,24 @@
+<div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <!-- <th scope="col">#</th> -->
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Status</th>
+            <th scope="col">Notes</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let candidate of candidates" >
+            <td>{{ candidate.firstname }}</td>
+            <td>{{ candidate.lastname }}</td>
+            <td>{{ candidate.status }}</td>
+            <td>{{ (candidate.notes.length > 50) ?(candidate.notes | slice:0:50)+'...':candidate.notes }}</td>
+          </tr>
+        </tbody>
+      </table>    
+    </div>
+  </div>

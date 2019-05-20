@@ -10,13 +10,26 @@ import { QuestionService } from '../service/question-service.service';
 export class QuestionListComponent implements OnInit {
 
   questions: Question[];
+  selectedQuestion: Question;
 
   constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
     this.questionService.findAll().subscribe(data =>{
       this.questions = data;
+      this.selectedQuestion = null;
     })
   }
+
+
+
+  onSelect(question: Question): void {
+    this.selectedQuestion = question;
+  }
+
+  // findById(id: number): Question{
+
+  //   return this.questionService.findById(id).subscribe(data=>);
+  // }
 
 }

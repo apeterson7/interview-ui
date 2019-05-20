@@ -5,7 +5,7 @@ import { Question } from '../model/question';
 import { headersToString } from 'selenium-webdriver/http';
 
 @Injectable(
-  // {  providedIn: 'root'}
+  {  providedIn: 'root'}
   )
 export class QuestionService {
 
@@ -20,6 +20,10 @@ export class QuestionService {
  
   public findAll(): Observable<Question[]> {
     return this.http.get<Question[]>(this.questionsUrl);
+  }
+
+  public findById(id: Number): Observable<Question>{
+    return this.http.get<Question>(this.questionsUrl+'/'+id);
   }
  
 
