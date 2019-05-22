@@ -1,29 +1,27 @@
-<!-- <div *ngIf="selectedQuestion===null"> -->
   <div class="card my-5">
     <div class="card-body">
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
             <!-- <th scope="col">#</th> -->
-            <th scope="col">Name</th>
-            <th scope="col">Type</th>
-            <th scope="col">Level</th>
-            <th scope="col">Text</th>
-            <th scope="col">Answer</th>
+            <th scope="col" style="width: 25%">Name</th>
+            <th scope="col" style="width: 10%">Type</th>
+            <th scope="col" style="width: 10%">Level</th>
+            <th scope="col" style="width: 30%">Text</th>
+            <th scope="col" style="width: 25%">Answer</th>
 
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let question of questions | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" 
-          [class.selected]="question === selectedQuestion"
           (click)="open(question)"
-          (click)="onSelect(question)">
+          scope="row">
             <!-- <td>{{ question.id }}</td> -->
-            <td>{{ question.name }}</td>
-            <td>{{ question.type }}</td>
-            <td>{{ question.level }}</td>
-            <td>{{ (question.text.length > 50) ?(question.text | slice:0:50)+'...':question.text }}</td>
-            <td>{{ (question.answer.length > 50) ? (question.answer | slice:0:50)+'...':question.answer }}</td>
+            <td style="width: 25%">{{ question.name }}</td>
+            <td style="width: 10%">{{ question.type }}</td>
+            <td style="width: 10%">{{ question.level }}</td>
+            <td style="width: 30%">{{ (question.text.length > 50) ?(question.text | slice:0:50)+'...':question.text }}</td>
+            <td style="width: 25%">{{ (question.answer.length > 50) ? (question.answer | slice:0:50)+'...':question.answer }}</td>
           </tr>
         </tbody>
       </table>  
@@ -35,6 +33,3 @@
     </div>
     
   </div>
-<!-- </div> -->
-<!-- <app-question-detail [question]="selectedQuestion"></app-question-detail> -->
-

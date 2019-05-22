@@ -13,6 +13,7 @@ export class QuestionFormComponent {
  
   question: Question;
 
+  submitted=false;
   types = ['single answer','multiple choice'];
   levels = ['junior', 'mid level', 'senior'];
  
