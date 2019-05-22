@@ -9,6 +9,8 @@ import { QuestionFormComponent } from './question-form/question-form.component';
 import { FormsModule } from '@angular/forms';
 import { QuestionDetailComponent } from './question-detail/question-detail.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CandidateDetailComponent } from './candidate-detail/candidate-detail.component';
 
 
 @NgModule({
@@ -17,15 +19,22 @@ import { CandidateListComponent } from './candidate-list/candidate-list.componen
     QuestionListComponent,
     QuestionFormComponent,
     QuestionDetailComponent,
-    CandidateListComponent
+    CandidateListComponent,
+    CandidateDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [ QuestionService],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ],
+  entryComponents: [
+    QuestionDetailComponent,
+    CandidateDetailComponent
+  ]
 })
+
 export class AppModule { }

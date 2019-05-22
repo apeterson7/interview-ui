@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Question } from '../model/question';
 import { QuestionService } from '../service/question-service.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { QuestionDetailComponent } from '../question-detail/question-detail.component';
 
 @Component({
   selector: 'app-question-list',
@@ -12,7 +14,10 @@ export class QuestionListComponent implements OnInit {
   questions: Question[];
   selectedQuestion: Question;
 
-  constructor(private questionService: QuestionService) { }
+  page = 1;
+  pageSize = 3;
+
+  constructor(private questionService: QuestionService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.questionService.findAll().subscribe(data =>{
@@ -22,14 +27,13 @@ export class QuestionListComponent implements OnInit {
   }
 
 
-
   onSelect(question: Question): void {
     this.selectedQuestion = question;
   }
 
-  // findById(id: number): Question{
-
-  //   return this.questionService.findById(id).subscribe(data=>);
-  // }
+  open(question:Question) {
+    const modalRef = this.modalService.open(QuestionDetailComponent, { size: 'lg' });
+    modalRef.componentInstance.question = question;
+  }
 
 }

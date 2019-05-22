@@ -14,8 +14,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let question of questions" 
+          <tr *ngFor="let question of questions | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" 
           [class.selected]="question === selectedQuestion"
+          (click)="open(question)"
           (click)="onSelect(question)">
             <!-- <td>{{ question.id }}</td> -->
             <td>{{ question.name }}</td>
@@ -25,9 +26,15 @@
             <td>{{ (question.answer.length > 50) ? (question.answer | slice:0:50)+'...':question.answer }}</td>
           </tr>
         </tbody>
-      </table>    
+      </table>  
+      <ngb-pagination
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="questions.length">
+      </ngb-pagination>  
     </div>
+    
   </div>
 <!-- </div> -->
-<app-question-detail [question]="selectedQuestion"></app-question-detail>
+<!-- <app-question-detail [question]="selectedQuestion"></app-question-detail> -->
 

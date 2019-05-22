@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Question} from '../model/question';
+import { Question } from '../model/question';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-question-detail',
@@ -10,8 +12,8 @@ export class QuestionDetailComponent implements OnInit {
 
   @Input() question: Question;
 
-  constructor() { }
-
+  constructor(public activeModal: NgbActiveModal) { }
+  
   ngOnInit() {
   }
 

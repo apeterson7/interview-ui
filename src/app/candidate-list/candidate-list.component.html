@@ -8,17 +8,24 @@
             <th scope="col">Last</th>
             <th scope="col">Status</th>
             <th scope="col">Notes</th>
-
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let candidate of candidates" >
+          <tr *ngFor="let candidate of candidates | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
             <td>{{ candidate.firstname }}</td>
             <td>{{ candidate.lastname }}</td>
             <td>{{ candidate.status }}</td>
             <td>{{ (candidate.notes.length > 50) ?(candidate.notes | slice:0:50)+'...':candidate.notes }}</td>
+            <td> <div class="btn btn-info" (click)="open(candidate)">Assigned Questions</div> </td>
           </tr>
         </tbody>
-      </table>    
+      </table>  
+      <ngb-pagination
+      [(page)]="page"
+      [pageSize]="pageSize"
+      [collectionSize]="candidates.length">
+    </ngb-pagination>    
     </div>
   </div>
+  

@@ -1,0 +1,39 @@
+
+<div class="modal-header">
+    <h4 class="modal-title">Candidate Detail</h4>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+</div>
+<div class="modal-body">
+  <h4>Questions assigned to {{candidate.firstname}}:</h4>
+
+  <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Type</th>
+          <th scope="col">Level</th>
+          <th scope="col">Text</th>
+          <th scope="col">Answer</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let question of candidate.questions" 
+        [class.selected]="question === selectedQuestion"
+        (click)="open(question)"
+        (click)="onSelect(question)">
+          <td>{{ question.name }}</td>
+          <td>{{ question.type }}</td>
+          <td>{{ question.level }}</td>
+          <td>{{ (question.text.length > 50) ?(question.text | slice:0:50)+'...':question.answer }}</td>
+          <td>{{ (question.answer.length > 50) ? (question.answer | slice:0:50)+'...':question.answer }}</td>
+        </tr>
+      </tbody>
+    </table>   
+    
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
