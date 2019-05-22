@@ -22,7 +22,7 @@
             <td>{{ question.name }}</td>
             <td>{{ question.type }}</td>
             <td>{{ question.level }}</td>
-            <td>{{ (question.text.length > 50) ?(question.text | slice:0:50)+'...':question.answer }}</td>
+            <td>{{ (question.text.length > 50) ?(question.text | slice:0:50)+'...':question.text }}</td>
             <td>{{ (question.answer.length > 50) ? (question.answer | slice:0:50)+'...':question.answer }}</td>
           </tr>
         </tbody>
