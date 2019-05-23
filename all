@@ -1,0 +1,10 @@
+    We analyzed your package.json, there are some packages to update:
+    
+      Name                               Version                  Command to update
+     --------------------------------------------------------------------------------
+      rxjs                               6.3.3 -> 6.5.2           ng update rxjs
+    
+    
+    There might be additional packages that are outdated.
+    Run "ng update --all" to try to update all at the same time.
+    

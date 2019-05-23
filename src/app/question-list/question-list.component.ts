@@ -32,7 +32,7 @@ export class QuestionListComponent implements OnInit {
   }
 
   open(question:Question) {
-    const modalRef = this.modalService.open(QuestionDetailComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(QuestionDetailComponent);
     modalRef.componentInstance.question = question;
   }
 

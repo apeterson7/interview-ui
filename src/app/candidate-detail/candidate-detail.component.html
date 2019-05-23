@@ -1,76 +1,87 @@
 
-<div class="modal-header">
-    <h4 class="modal-title">Candidate Detail</h4>
+
+<div class="card my-5">
+  <div class="card-body">
+      <div *ngIf="edits&&!saved" class="alert alert-primary" role="alert">
+          Unsaved Changes
+      </div>
+      <div *ngIf="saved&&!edits" class="alert alert-success" role="alert">
+          Saved &#10004;
+      </div>
+      <div *ngIf="!edits&&!saved" class="alert alert-light" role="alert">
+      </div>
+    <div class="container-fluid">
+  
+      <div class="row">
+
+        <div class="col-sm-4">
+          <h4>Questions assigned to {{candidate.firstname}}: </h4>
+          <span style="margin-bottom: 15px" class="btn btn-outline-primary" (click)="saveAssignedQuestions(assignedQuestions)">Save Changes</span>
+          
+          
+          <div class="table-responsive">
+            <table style="height: 500px" class="table table-bordered table-striped table-wrapper-scroll-y my-custom-scrollbar">
+              <thead class="thead">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Level</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let question of assignedQuestions" [class.selected]="question === selectedQuestion">
+                  <td>{{ question.name }}</td>
+                  <td>{{ question.level }}</td>
+                  <td>
+                    <div class="btn btn-outline-danger btn-sm" (click)="assignedToAvailable(question)">Remove</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-sm-8">
+          <h4>Available Questions: </h4>
+          <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="availableQuestions.length">
+          </ngb-pagination>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead class="thead">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Level</th>
+                  <th scope="col">Text</th>
+                  <th scope="col">Answer</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let question of availableQuestions | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"
+                  [class.selected]="question === selectedQuestion">
+                  <td>{{ question.name }}</td>
+                  <td>{{ question.type }}</td>
+                  <td>{{ question.level }}</td>
+                  <td>{{ (question.text.length > 10) ?(question.text | slice:0:10)+'...':question.text }}</td>
+                  <td>{{ (question.answer.length > 10) ? (question.answer | slice:0:10)+'...':question.answer }}</td>
+                  <td>
+                    <div class="btn btn-outline-success btn-sm" (click)="availableToAssigned(question)">Assign</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
-<div class="modal-body">
-  <h4>Questions assigned to {{candidate.firstname}}: </h4>
-  <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Type</th>
-          <th scope="col">Level</th>
-          <th scope="col">Text</th>
-          <th scope="col">Answer</th>
-          <th style="width: 10%"></th>
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let question of assignedQuestions" 
-        [class.selected]="question === selectedQuestion">
-          <td>{{ question.name }}</td>
-          <td>{{ question.type }}</td>
-          <td>{{ question.level }}</td>
-          <td>{{ (question.text.length > 10) ?(question.text | slice:0:10)+'...':question.text }}</td>
-          <td>{{ (question.answer.length > 10) ? (question.answer | slice:0:10)+'...':question.answer }}</td>
-          <td style="width: 10%"> <div class="btn btn-outline-danger btn-sm" (click)="assignedToAvailable(question)">Remove</div> </td>
 
-        </tr>
-      </tbody>
-    </table>  
-    <!-- <ngb-pagination
-      [(page)]="page"
-      [pageSize]="pageSize"
-      [collectionSize]="assignedQuestions.length">
-    </ngb-pagination>     -->
-    <h4>Available Questions: </h4>
-  <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col" >Name</th>
-          <th scope="col">Type</th>
-          <th scope="col">Level</th>
-          <th scope="col" >Text</th>
-          <th scope="col" >Answer</th>
-          <th style="width: 10%" ></th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let question of availableQuestions | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" 
-        [class.selected]="question === selectedQuestion">
-          <td >{{ question.name }}</td>
-          <td >{{ question.type }}</td>
-          <td >{{ question.level }}</td>
-          <td>{{ (question.text.length > 10) ?(question.text | slice:0:10)+'...':question.text }}</td>
-          <td >{{ (question.answer.length > 10) ? (question.answer | slice:0:10)+'...':question.answer }}</td>
-          <td style="width: 10%"> <div class="btn btn-outline-success btn-sm" (click)="availableToAssigned(question)">Assign</div> </td>
-        </tr>
-      </tbody>
-    </table> 
-    <ngb-pagination
-      [(page)]="page"
-      [pageSize]="pageSize"
-      [collectionSize]="availableQuestions.length">
-    </ngb-pagination>      
-    
-</div>
-<div class="modal-footer">
-    <div *ngIf="saved"><span class="oi oi-check"></span> Saved </div>
-    <div *ngIf="!saved"> Unsaved Changes </div>
-    <div>{{saved}}</div>
-    <div class="btn btn-outline-primary" (click)="saveAssignQuestions(assignedQuestions); activeModal.close('Close click')">Assign</div>
+<!-- <div>
+   
     <button type="button" class="btn btn-outline-dark" 
     (click)="activeModal.close('Close click')">Close</button>
-</div>
+</div> -->

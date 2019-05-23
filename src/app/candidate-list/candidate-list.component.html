@@ -1,7 +1,7 @@
 <div class="card my-5">
     <div class="card-body">
       <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
+        <thead class="">
           <tr>
             <!-- <th scope="col">#</th> -->
             <th scope="col">First</th>
@@ -17,7 +17,9 @@
             <td>{{ candidate.lastname }}</td>
             <td>{{ candidate.status }}</td>
             <td>{{ (candidate.notes.length > 50) ?(candidate.notes | slice:0:50)+'...':candidate.notes }}</td>
-            <td style="width: 10%"> <div class="btn btn-info" (click)="open(candidate)">Assigned Questions</div> </td>
+            <td style="width: 10%"> 
+              <div class="btn btn-info"><a [routerLink]="['/candidate/', candidate.candidate_id]">Assigned Questions</a></div>
+             </td>
           </tr>
         </tbody>
       </table>  
