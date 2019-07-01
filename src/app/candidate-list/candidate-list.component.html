@@ -18,7 +18,7 @@
             <td>{{ candidate.status }}</td>
             <td>{{ (candidate.notes.length > 50) ?(candidate.notes | slice:0:50)+'...':candidate.notes }}</td>
             <td style="width: 10%"> 
-              <div class="btn btn-info"><a [routerLink]="['/candidate/', candidate.candidate_id]">Assigned Questions</a></div>
+              <div class="btn btn-info" [routerLink]="['/candidate/', candidate.candidate_id]">Assigned Questions</div>
              </td>
           </tr>
         </tbody>
