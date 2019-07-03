@@ -13,13 +13,56 @@
       <button [disabled]="loading">Login</button>
   </div>
 </form> -->
+<div class="row">
+    <div class="col-sm-4">
+        <article class="card" style="padding:20px">
+            <div class="container">
+                <a href="" class="float-right btn btn-outline-primary">Sign up</a>
+                <h4 class="card-title mb-4 mt-1">Sign in</h4>
 
-<div class="container">
-    <div>
-      User Name : <input type="text" name="username" [(ngModel)]="username">
-      Password : <input type="password" name="password" [(ngModel)]="password">
+                <label>User Name </label>
+                <input class="float-right" type="text" name="username" [(ngModel)]="username">
+                
+                <label>Password </label>
+                <input class="float-right" (keyup.enter)="checkLogin()" type="password" name="password" [(ngModel)]="password">
+                
+                <button (click)="checkLogin()" class="btn btn-success"> Login</button>
+
+            </div>
+        </article>
     </div>
-    <button (click)="checkLogin()" class="btn btn-success">
-      Login
-    </button>
 </div>
+
+
+<!-- <div class="row">
+	<div class="col-sm-4">
+        <div class="card">
+            <article class="card-body">
+            <a href="" class="float-right btn btn-outline-primary">Sign up</a>
+            <h4 class="card-title mb-4 mt-1">Sign in</h4>
+                <form>
+                <div class="form-group">
+                    <label>Your email</label>
+                    <input name="" class="form-control" placeholder="Email" type="email">
+                </div> 
+                <div class="form-group">
+                    <a class="float-right" href="#">Forgot?</a>
+                    <label>Your password</label>
+                    <input class="form-control" placeholder="******" type="password">
+                </div> 
+                <div class="form-group"> 
+                <div class="checkbox">
+                <label> <input type="checkbox"> Save password </label>
+                </div> 
+                </div> 
+                <div class="form-group">
+                    <button type="submit"  class="btn btn-primary btn-block"> Login  </button>
+                </div>                                                    
+            </form>
+            </article>
+        </div> card.// 
+    </div>
+    <div class="col-sm-8">
+        <h1>Welcome to Interview
+    </div>
+</div> -->

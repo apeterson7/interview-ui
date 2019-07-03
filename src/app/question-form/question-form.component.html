@@ -59,5 +59,13 @@
 
         <button type="submit" [disabled]="!questionForm.form.valid" class="btn btn-info">Submit</button>
       </form>
+      <br>
+      <label>Bulk Upload</label>
+
+      <div style="text-align:center">
+          <input type="file" (change)="selectFile($event)">
+          <button [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+      </div>
+      <!-- <app-fileupload></app-fileupload> -->
     </div>
   </div>

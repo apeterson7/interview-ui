@@ -1,45 +1,15 @@
 import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { QuestionService } from '../service/question-service.service';
-import { Question } from '../model/question';
-
 import {FileUploader} from 'ng2-file-upload';
 import {FileService } from '../service/file.service';
 import {HttpResponse} from '@angular/common/http';
 
- 
+
 @Component({
-  selector: 'app-question-form',
-  templateUrl: './question-form.component.html',
-  styleUrls: ['./question-form.component.css']
+  selector: 'app-fileupload',
+  templateUrl: './fileupload.component.html',
+  styleUrls: ['./fileupload.component.css']
 })
-export class QuestionFormComponent {
- 
-  question: Question;
-
-  submitted=false;
-  types = ['single answer','multiple choice'];
-  levels = ['junior', 'mid level', 'senior'];
- 
-  constructor(private route: ActivatedRoute, private router: Router, private questionService: QuestionService,private fileService: FileService) {
-    this.question = new Question();
-    this.question.score=-1;
-    // this.question.id=1;
-  }
- 
-  onSubmit() {
-    this.questionService.save(this.question).subscribe(result => this.gotoUserList());
-  }
- 
-  get diagnostic() { return JSON.stringify(this.question); }
-
-  gotoUserList() {
-    this.router.navigate(['/questions']);
-  }
-
-
-
-  uploadedQuestions: Question[];
+export class FileuploadComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput: ElementRef;
  
@@ -50,6 +20,7 @@ export class QuestionFormComponent {
   selectedFiles: FileList;
 	currentFile: File;
 
+  constructor(private fileService: FileService) {}
 	
   selectFile(event) {
     console.log(event.target.files)
@@ -82,4 +53,5 @@ export class QuestionFormComponent {
   fileClicked() {
     this.fileInput.nativeElement.click();
   }
+
 }

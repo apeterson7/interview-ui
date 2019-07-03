@@ -14,6 +14,8 @@ import { CandidateDetailComponent } from './candidate-detail/candidate-detail.co
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './logout/logout.component';
+import {FileUploadModule} from 'ng2-file-upload';
+import { FileuploadComponent } from './fileupload/fileupload.component';
 
 
 @NgModule({
@@ -26,14 +28,16 @@ import { LogoutComponent } from './logout/logout.component';
     CandidateDetailComponent,
     LoginComponent,
     HomeComponent,
-    LogoutComponent
+    LogoutComponent,
+    FileuploadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    FileUploadModule
   ],
   providers: [ QuestionService],
   bootstrap: [ AppComponent ],
