@@ -19,15 +19,27 @@ export class QuestionService {
   }
  
   public findAll(): Observable<Question[]> {
-    return this.http.get<Question[]>(this.questionsUrl);
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<Question[]>(this.questionsUrl, {headers});
   }
 
   public findById(id: Number): Observable<Question>{
-    return this.http.get<Question>(this.questionsUrl+'/'+id);
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<Question>(this.questionsUrl+'/'+id, {headers});
   }
  
 
   public save(question: Question) {
-    return this.http.post<Question>(this.questionsUrl, question);
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.post<Question>(this.questionsUrl, question, {headers});
   }
 }

@@ -17,16 +17,27 @@ export class CandidateService{
 
   }
   public findAll(): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>( this.candidateUrl);
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<Candidate[]>( this.candidateUrl, {headers});
   }
   
   public findById(id: number): Observable<Candidate> {
-    return this.http.get<Candidate>( this.candidateUrl+'/'+id);
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<Candidate>( this.candidateUrl+'/'+id, {headers});
   }
 
   public addQuestionsByCandidateId(questions:Question[] , id:number): Observable<Question[]> {
-    console.debug("here")
-    return this.http.put<Question[]>(this.candidateUrl+'/'+id, questions);
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.put<Question[]>(this.candidateUrl+'/'+id, questions, {headers});
   }
 
     /**

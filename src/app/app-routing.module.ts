@@ -7,16 +7,19 @@ import { CandidateListComponent } from './candidate-list/candidate-list.componen
 import { CandidateDetailComponent } from './candidate-detail/candidate-detail.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-
+import { LogoutComponent } from './logout/logout.component';
+import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  // { path: '', component: HomeComponent,canActivate:[AuthGuardService]},
+  { path: '', component: QuestionListComponent,canActivate:[AuthGuardService]},
   { path: 'login', component: LoginComponent },
-  { path: 'questions', component: QuestionListComponent },
-  { path: 'addquestions', component: QuestionFormComponent },
-  { path: 'question', component: QuestionDetailComponent},
-  { path: 'candidates', component: CandidateListComponent},
-  { path: 'candidate/:id', component: CandidateDetailComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'questions', component: QuestionListComponent, canActivate:[AuthGuardService]},
+  { path: 'addquestions', component: QuestionFormComponent, canActivate:[AuthGuardService]},
+  { path: 'question', component: QuestionDetailComponent, canActivate:[AuthGuardService]},
+  { path: 'candidates', component: CandidateListComponent, canActivate:[AuthGuardService]},
+  { path: 'candidate/:id', component: CandidateDetailComponent, canActivate:[AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 
