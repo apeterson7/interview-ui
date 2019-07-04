@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpEvent, HttpRequest} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Question } from '../model/question';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class FileService {
     
    }
 
-   uploadQuestionFile(file: File): Observable<HttpEvent<{}>> {
+   uploadQuestionFile(file: File): Observable<Question[]> {
 		const formdata: FormData = new FormData();
     formdata.append('file', file);
     
@@ -32,12 +33,8 @@ export class FileService {
     
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
 
-    const req = new HttpRequest('POST', 'http://localhost:8080/api/upload/questions', 
-      formdata, 
-      {headers} 
-    );
-    
-    return this.http.request(req);
-    
+    return this.http.post<Question[]>('http://localhost:8080/api/upload/questions', formdata, {headers});
+
    }
+   
 }

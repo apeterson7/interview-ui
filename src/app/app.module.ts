@@ -16,6 +16,8 @@ import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './logout/logout.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import { FileuploadComponent } from './fileupload/fileupload.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { FileuploadComponent } from './fileupload/fileupload.component';
     LoginComponent,
     HomeComponent,
     LogoutComponent,
-    FileuploadComponent
+    FileuploadComponent,
+    CandidateFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,9 @@ import { FileuploadComponent } from './fileupload/fileupload.component';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    FileUploadModule
+    FileUploadModule,
+    NgxFileDropModule
+
   ],
   providers: [ QuestionService],
   bootstrap: [ AppComponent ],

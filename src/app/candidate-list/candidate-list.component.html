@@ -6,20 +6,23 @@
             <!-- <th scope="col">#</th> -->
             <th scope="col">First</th>
             <th scope="col">Last</th>
-            <th scope="col">Status</th>
             <th scope="col">Notes</th>
             <th style="width: 10%"></th>
+            <th scope="col">Status</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let candidate of candidates | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
             <td>{{ candidate.firstname }}</td>
             <td>{{ candidate.lastname }}</td>
-            <td>{{ candidate.status }}</td>
             <td>{{ (candidate.notes.length > 50) ?(candidate.notes | slice:0:50)+'...':candidate.notes }}</td>
             <td style="width: 10%"> 
               <div class="btn btn-info" [routerLink]="['/candidate/', candidate.candidate_id]">Assigned Questions</div>
-             </td>
+            </td>
+            <td style="width: 10%"> 
+              <div *ngIf="candidate.status == 'new'" class="btn btn-info">Send Interview</div>
+              <div *ngIf="candidate.status != 'new'" class="btn btn-secondary">{{candidate.status}}</div>
+            </td>
           </tr>
         </tbody>
       </table>  

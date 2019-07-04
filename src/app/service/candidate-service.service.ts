@@ -40,6 +40,14 @@ export class CandidateService{
     return this.http.put<Question[]>(this.candidateUrl+'/'+id, questions, {headers});
   }
 
+  public save(candidate: Candidate){
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.post<Candidate>(this.candidateUrl, candidate, {headers})
+  }
+
     /**
    * Handle Http operation that failed.
    * Let the app continue.

@@ -1,5 +1,6 @@
 <!-- <div>
-  <input #fileInput type="file" ng2FileSelect [uploader]="uploader"/>
+  <input #fileInput type="file" ng2FileSelect (change)="selectFile($event)" />
+  [uploader]="uploader"/>
  
   <div class="drop-box" ng2FileDrop
        [ngClass]="{'dragover': isDropOver}"
@@ -9,10 +10,69 @@
     <span class="drag-in-title">Import or drag .xlsx file here</span>
     <span class="drag-over-title">Drop the file</span>
   </div>
+</div>  -->
+
+
+<!-- <div style="text-align:center">
+      <input type="file" (change)="selectFile($event)">
+      <button [disabled]="!selectedFiles" (click)="upload()">Upload</button>
 </div> -->
 
 
-<div style="text-align:center">
-      <input type="file" (change)="selectFile($event)">
-      <button [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+<div class="center">
+  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+  (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+      <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+        Import or drag .xlsx file here
+        <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
+      </ng-template>
+  </ngx-file-drop>
+  <div *ngFor="let item of files; let i=index">
+    <div class="card-body rounded border" style="margin:10px"> 
+        <strong>{{ item.relativePath }} loaded </strong><button [disabled]="isError||isSuccess" (click)="saveQuestions()" class="float-right btn btn-success">Save</button>
+    </div> 
+  </div>
+ 
 </div>
+
+<div *ngIf="isError" class="alert alert-danger" role="alert">
+  {{ errorMsg }}
+</div>
+
+<div *ngIf="isSuccess" class="alert alert-success" role="alert">
+  Questions Saved
+</div>
+
+<div *ngIf="isLoading">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<table *ngIf="uploadedQuestions != null" class="table table-bordered table-striped">
+  <thead class="">
+    <tr>
+      <!-- <th scope="col">#</th> -->
+      <th scope="col" style="width: 30%">Name</th>
+      <th scope="col" style="width: 30%">Type</th>
+      <th scope="col" style="width: 20%">Level</th>
+      <!-- <th scope="col" style="width: 30%">Text</th>
+      <th scope="col" style="width: 25%">Answer</th> -->
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let question of uploadedQuestions" 
+    (click)="open(question)"
+    scope="row">
+      <!-- <td>{{ question.id }}</td> -->
+      <td style="width: 30%">{{ question.name }}</td>
+      <td style="width: 30%">{{ question.type }}</td>
+      <td style="width: 20%">{{ question.level }}</td>
+      <!-- <td style="width: 30%">{{ (question.text.length > 50) ?(question.text | slice:0:50)+'...':question.text }}</td>
+      <td style="width: 25%">{{ (question.answer.length > 50) ? (question.answer | slice:0:50)+'...':question.answer }}</td> -->
+    </tr>
+  </tbody>
+</table>  

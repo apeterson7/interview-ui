@@ -14,7 +14,7 @@ export class CandidateListComponent implements OnInit {
   constructor(private candidateService: CandidateService, private modalService: NgbModal) { }
 
   page = 1;
-  pageSize = 3;
+  pageSize = 5;
 
   candidates: Candidate[];
   selectedCandidate: Candidate;

@@ -1,6 +1,10 @@
   <div class="card my-5">
     <div class="card-body">
-      <table class="table table-bordered table-striped">
+        <div class="md-form">
+            <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput>
+            <label for="search">Search</label>
+          </div>
+      <table class="table table-bordered table-striped z-depth-1" mdbTable>
         <thead class="">
           <tr>
             <!-- <th scope="col">#</th> -->
@@ -13,7 +17,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let question of questions | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" 
+
+          <tr *ngFor="let question of questions | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index" 
           (click)="open(question)"
           scope="row">
             <!-- <td>{{ question.id }}</td> -->
@@ -30,6 +35,7 @@
         [pageSize]="pageSize"
         [collectionSize]="questions.length">
       </ngb-pagination>  
+     
     </div>
     
   </div>

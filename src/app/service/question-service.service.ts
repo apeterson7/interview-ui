@@ -13,7 +13,7 @@ export class QuestionService {
   private headers: HttpHeaders;
  
   constructor(private http: HttpClient) {
-    this.questionsUrl = 'http://localhost:8080/api/questions';
+    this.questionsUrl = 'http://localhost:8080/api';
     this.headers = new HttpHeaders();
     this.headers.append('Content-Type', 'application/json');
   }
@@ -23,7 +23,7 @@ export class QuestionService {
     let password='password'
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<Question[]>(this.questionsUrl, {headers});
+    return this.http.get<Question[]>(this.questionsUrl+'/questions', {headers});
   }
 
   public findById(id: Number): Observable<Question>{
@@ -31,7 +31,7 @@ export class QuestionService {
     let password='password'
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<Question>(this.questionsUrl+'/'+id, {headers});
+    return this.http.get<Question>(this.questionsUrl+'/question/'+id, {headers});
   }
  
 
@@ -40,6 +40,14 @@ export class QuestionService {
     let password='password'
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<Question>(this.questionsUrl, question, {headers});
+    return this.http.post<Question>(this.questionsUrl+'/question', question, {headers});
+  }
+
+  public saveAll(questions: Question[]){
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.post<Question[]>(this.questionsUrl+'/questions', questions, {headers});
   }
 }
