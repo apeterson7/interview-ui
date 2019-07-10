@@ -34,27 +34,17 @@ export class InterviewService {
     return this.http.get<Interview>(this.interviewUrl+'/interview/'+id, {headers});
   }
 
-  public createInterview(candidate:Candidate): Observable<Interview>{
-    let username='user'
-    let password='password'
   
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    let interview = new Interview();
-    interview.candidate = candidate;
-    interview.status = 'new';
-
-    return this.http.post<Interview>(this.interviewUrl+'/interview',interview,{ headers });
-
-  }
 
   public saveInterview(interview:Interview){
     let username='user'
     let password='password'
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<Interview>(this.interviewUrl+'/interview',interview,{ headers });
+    return this.http.put<Interview>(this.interviewUrl+'/interview',interview,{ headers });
 
   }
+
   // public save(interview: Interview) {
   //   let username='user'
   //   let password='password'

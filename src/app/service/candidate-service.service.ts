@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Question } from '../model/question';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Interview } from '../model/interview';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class CandidateService{
 
   constructor(private http: HttpClient) {
     this.candidateUrl = 'http://localhost:8080/api/candidates';
-
   }
+
   public findAll(): Observable<Candidate[]> {
     let username='user'
     let password='password'
@@ -38,6 +39,16 @@ export class CandidateService{
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     return this.http.put<Question[]>(this.candidateUrl+'/'+id, questions, {headers});
+  }
+
+  public createInterviewForCandidateById(id:number): Observable<Candidate> {
+    let username='user'
+    let password='password'
+  
+    const interview = new Interview();
+    
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.put<Candidate>(this.candidateUrl+'/add-interview/'+id, interview, {headers});
   }
 
   public save(candidate: Candidate){

@@ -5,6 +5,7 @@ import { CandidateDetailComponent} from '../candidate-detail/candidate-detail.co
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InterviewService } from '../service/interview.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,10 +15,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class CandidateListComponent implements OnInit {
 
+
   constructor(
     private candidateService: CandidateService, 
     private modalService: NgbModal,
-    private interviewService: InterviewService
+    private interviewService: InterviewService,
+    private router: Router
     ) 
   { }
 
@@ -44,19 +47,13 @@ export class CandidateListComponent implements OnInit {
   //   modalRef.componentInstance.candidate = candidate;
   // }
 
-  sendInterview(candidate:Candidate){
-    this.interviewService.createInterview(candidate).subscribe(data =>{
-      console.log(data.interview_id + " ")
-    }
+  sendInterview(id:number){
+    console.log(id);
+    this.candidateService.createInterviewForCandidateById(id).subscribe(
+      data => {
+        console.log(data)
+        this.router.navigate(['interviews'])
+      }
     );
-    
-    candidate.status = 'pending';
-    this.candidateService.save(candidate).subscribe(data =>{
-      console.log(data.candidate_id + " " + data.status)
-    }
-    );;
-
   }
-
-  
 }

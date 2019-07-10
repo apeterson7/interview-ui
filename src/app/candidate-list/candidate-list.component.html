@@ -31,8 +31,7 @@
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <button *ngIf="candidate.status == 'new'" class="btn btn-info" 
-                            (click)="sendInterview(candidate)" 
-                            [disabled]='5 > candidate.questions.length'>Send Interview</button>
+                            (click)="sendInterview(candidate.candidate_id)" >Send Interview</button>
                     <button *ngIf="candidate.status == 'hired'" class="btn btn-success" [disabled]='true'>{{candidate.status}}</button> 
                     <button *ngIf="candidate.status == 'rejected'" class="btn btn-danger" [disabled]='true'>{{candidate.status}}</button> 
                     <button *ngIf="candidate.status == 'pending'" class="btn btn-secondary" [disabled]='true'>{{candidate.status}}</button> 
