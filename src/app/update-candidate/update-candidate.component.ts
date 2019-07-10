@@ -42,10 +42,17 @@ export class UpdateCandidateComponent implements OnInit {
   }
 
   save(){
-    this.candidateService.save(this.candidate).subscribe(data =>
-      {
-        console.log(data);
-      });
+    this.candidateService.update(this.candidate).subscribe(result => this.goToCandidate(result.candidate_id));
+
+    
+    // this.candidateService.save(this.candidate).subscribe(data =>
+    //   {
+    //     console.log(data);
+    //   });
+    // this.router.navigate(['/candidates']);
+  }
+
+  goToCandidate(id:number) {
     this.router.navigate(['/candidates']);
   }
 

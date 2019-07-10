@@ -36,29 +36,20 @@ export class InterviewListComponent implements OnInit {
 
   hire(interview: Interview){
     interview.status = 'hired';
+    interview.candidate.status = 'hired';
+
     this.interviewService.saveInterview(interview).subscribe(
       interview => console.log(interview.status)
     );;
 
-    let candidate = interview.candidate;
-
-    candidate.status = 'hired';
-
-    this.candidateService.save(candidate).subscribe(
-      candidate => console.log(candidate.status)
-    );
   }
 
   reject(interview: Interview){
     interview.status = 'rejected';
+    interview.candidate.status = 'rejected';
+    
     this.interviewService.saveInterview(interview).subscribe(
         interview => console.log(interview.status)
-    );
-
-    let candidate = interview.candidate;
-    candidate.status = 'rejected';
-    this.candidateService.save(candidate).subscribe(
-      candidate => console.log(candidate.status)
     );
   }
 

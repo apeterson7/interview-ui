@@ -46,7 +46,7 @@ export class CandidateService{
     let password='password'
   
     const interview = new Interview();
-    
+
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     return this.http.put<Candidate>(this.candidateUrl+'/add-interview/'+id, interview, {headers});
   }
@@ -57,6 +57,14 @@ export class CandidateService{
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     return this.http.post<Candidate>(this.candidateUrl, candidate, {headers})
+  }
+
+  public update(candidate: Candidate){
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.put<Candidate>(this.candidateUrl, candidate, {headers})
   }
 
     /**
