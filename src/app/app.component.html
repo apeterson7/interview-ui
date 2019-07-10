@@ -15,18 +15,30 @@
           <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
             <div *ngIf="loginService.isUserLoggedIn()">
             <h3 class="card-title text-center text-white py-3">{{ user }}</h3>
+
             <ul class="text-center list-inline py-3">
               <li class="list-inline-item"><a routerLink="/questions" class="btn btn-info">List Questions</a></li>
               <li class="list-inline-item"><a routerLink="/candidates" class="btn btn-info">List Candidates</a></li>
-              <li class="list-inline-item"><a class="btn btn-info">List Interviews</a></li>
-
+              <li class="list-inline-item"><a routerLink="/interviews" class="btn btn-info">List Interviews</a></li>
               <li class="list-inline-item"><a routerLink="/addquestions" class="btn btn-info">Add Question</a></li>
-              <!-- <li class="list-inline-item"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="btn btn-info">Login</a></li> -->
+              <li class="list-inline-item"><a routerLink="/addcandidate" class="btn btn-info">Add Candidate</a></li>
+
               <li class="list-inline-item"><a routerLink="/logout" class="btn btn-info">Logout</a></li>
             </ul>
           </div>
         </div>
       </div>
+      <!-- <nav>
+              <a class="navbar-brand">Angular Router</a>
+              <ul class="nav navbar-nav justify-content-center" routerLinkActive="active">
+                  <li class="nav-item"><a routerLink="/questions" class="nav-link">List Questions</a></li>
+                  <li class="nav-item"><a routerLink="/candidates" class="nav-link">List Candidates</a></li>
+                  <li class="nav-item"><a routerLink="/interviews" class="nav-link">List Interviews</a></li>
+                  <li class="nav-item"><a routerLink="/addquestions" class="nav-link">Add Question</a></li>
+                  <li class="nav-item"><a routerLink="/addcandidate" class="nav-link">Add Candidate</a></li>
+                  <li class="nav-item"><a routerLink="/logout" class="nav-link">Logout</a></li>
+              </ul>
+      </nav> -->
       <router-outlet></router-outlet>
     </div>
   </div>

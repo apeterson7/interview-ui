@@ -2,60 +2,63 @@
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #questionForm="ngForm">
       <!-- debug <p> {{question.name }} {{question.type }} {{question.level }} {{question.text }} {{question.answer }}</p> -->
-      <div class="form-group">
-        <label for="name">Candidate Name</label>
-        <input type="text" [(ngModel)]="candidate.name" 
-          class="form-control" id="name" name="name" placeholder="Enter candidate name"
-          required #name="ngModel">
-      </div>
+ 
       <!-- <div [hidden]="!name.pristine" class="alert alert-danger">Name is required</div> -->
 
       <div class="form-group">
-          <label for="type">Username</label>
-
-          <select class="form-control"  id="type"
-            required
-            [(ngModel)]="candidate.type" name="type">
-          <option *ngFor="let type of types" [value]="type">{{type}}</option>
-          </select>
+        <label for="answer">First Name</label>
+        <input type="text" [(ngModel)]="candidate.firstname" 
+          class="form-control" id="firstname" name="answer" 
+          required #answer="ngModel">
+          <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)"
+              class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+              Name is required.
+            </div>
+            <div *ngIf="name.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+            <div *ngIf="name.errors.forbiddenName">
+              Name cannot be Bob.
+            </div>
+          </div> -->
       </div>
 
       <div class="form-group">
-          <label for="level">Password</label>
-
-          <select class="form-control"  id="level"
-            required
-            [(ngModel)]="question.level" name="level">
-          <option *ngFor="let level of levels" [value]="level">{{level}}</option>
-          </select>
-      </div>
-
-      <div class="form-group">
-          <label for="text">email</label>
-          <input type="text" [(ngModel)]="question.text" 
-            class="form-control" id="text" name="text" placeholder="Enter question text"
-            required #text="ngModel">
-      </div>
-
-      <div class="form-group">
-        <label for="answer">Firstname</label>
-        <input type="text" [(ngModel)]="question.answer" 
-          class="form-control" id="answer" name="answer" placeholder="Enter correct answer"
+        <label for="answer">Last Name</label>
+        <input type="text" [(ngModel)]="candidate.lastname" 
+          class="form-control" id="lastname" name="lastname" 
           required #answer="ngModel">
       </div>
 
       <div class="form-group">
-          <label for="answer">Lastname</label>
-          <input type="text" [(ngModel)]="question.answer" 
-            class="form-control" id="answer" name="answer" placeholder="Enter correct answer"
-            required #answer="ngModel">
+        <label for="type">Username</label>
+
+        <input type="text" [(ngModel)]="candidate.username" 
+          class="form-control" id="username" name="username" 
+          required #answer="ngModel">
       </div>
 
       <div class="form-group">
-          <label for="answer">Notes</label>
-          <input type="text" [(ngModel)]="question.answer" 
-            class="form-control" id="answer" name="answer" placeholder="Enter correct answer"
-            required #answer="ngModel">
+        <label for="level">Password</label>
+
+        <input type="password" [(ngModel)]="candidate.password" 
+          class="form-control" id="password" name="password" placeholder="********"
+          required #answer="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="text">Email</label>
+        <input type="text" [(ngModel)]="candidate.email" 
+          class="form-control" id="email" name="email"  email
+          required #answer="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="answer">Notes</label>
+        <input type="text" [(ngModel)]="candidate.answer" 
+          class="form-control" id="answer" name="answer" placeholder="Initial Comments"
+          #answer="ngModel">
       </div>
 
       <button type="submit" [disabled]="!questionForm.form.valid" class="btn btn-info">Submit</button>
@@ -64,6 +67,3 @@
 
   </div>
 </div>
-
-
-

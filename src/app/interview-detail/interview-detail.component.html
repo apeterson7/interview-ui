@@ -1,0 +1,36 @@
+<div class="card my-5">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6">
+        <h3>Candidate: {{ interview.candidate.firstname }} {{ interview.candidate.lastname }}</h3>
+      </div>
+      <div class="col-6">
+        <div *ngIf="interview.status == 'new'" class="alert alert-primary" role="alert">
+          Status: {{ interview.status | titlecase}}
+        </div>
+        <div *ngIf="interview.status == 'hired'" class="alert alert-success" role="alert">
+          Status: {{ interview.status | titlecase}}
+        </div>
+        <div *ngIf="interview.status == 'rejected'" class="alert alert-danger" role="alert">
+          Status: {{ interview.status | titlecase}}
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p>ID: {{ interview.interview_id }}</p>
+      </div>
+    </div>
+    <div class="card mb-3" *ngFor="let question of interview.candidate.questions, let i = index">
+      <div class="card-header">
+        <b>Question:</b> {{ question.name }}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"> Level {{ question.level }}</h5>
+        <p class="card-text">{{ question.text }}</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      </div>
+    </div>
+  </div>
+</div>

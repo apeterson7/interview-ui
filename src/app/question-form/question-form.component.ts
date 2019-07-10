@@ -2,8 +2,6 @@ import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from '../service/question-service.service';
 import { Question } from '../model/question';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { QuestionDetailComponent } from '../question-detail/question-detail.component';
 
 import {FileUploader} from 'ng2-file-upload';
 import {FileService } from '../service/file.service';
@@ -23,14 +21,7 @@ export class QuestionFormComponent {
   types = ['single answer','multiple choice'];
   levels = ['junior', 'mid level', 'senior'];
  
-  constructor(
-      private route: ActivatedRoute, 
-      private router: Router, 
-      private questionService: QuestionService,
-      private fileService: FileService,
-      private modalService: NgbModal
-    ) 
-    {
+  constructor(private route: ActivatedRoute, private router: Router, private questionService: QuestionService,private fileService: FileService) {
     this.question = new Question();
     this.question.score=-1;
     // this.question.id=1;
@@ -46,9 +37,53 @@ export class QuestionFormComponent {
     this.router.navigate(['/questions']);
   }
 
-  open(question:Question) {
-    const modalRef = this.modalService.open(QuestionDetailComponent);
-    modalRef.componentInstance.question = question;
+
+
+  uploadedQuestions: Question[];
+
+  @ViewChild('fileInput') fileInput: ElementRef;
+ 
+  uploader: FileUploader;
+  isDropOver: boolean;
+  uploadUrl = 'http://localhost:8080/api/upload/questions';
+
+  selectedFiles: FileList;
+	currentFile: File;
+
+	
+  selectFile(event) {
+    console.log(event.target.files)
+    this.selectedFiles = event.target.files;
+  }
+  
+  upload() {
+    this.currentFile = this.selectedFiles.item(0);
+    // this.fileService.uploadQuestionFile(this.currentFile).subscribe(event => {
+    //  if (event instanceof HttpResponse) {
+    //     console.log('File is completely uploaded!');
+    //   }
+    // });
+    this.fileService.uploadQuestionFile(this.currentFile).subscribe(
+      event => {
+        
+      }
+    );
+    this.selectedFiles = undefined;
   }
 
+  ngOnInit(): void {
+    const headers = [{name: 'Accept', value: 'application/json'}];
+    this.uploader = new FileUploader({url: this.uploadUrl, autoUpload: true, headers: headers});
+ 
+    this.uploader.onCompleteAll = () => alert('File uploaded');
+
+  }
+ 
+  fileOverAnother(e: any): void {
+    this.isDropOver = e;
+  }
+ 
+  fileClicked() {
+    this.fileInput.nativeElement.click();
+  }
 }

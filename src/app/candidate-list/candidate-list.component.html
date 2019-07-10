@@ -6,22 +6,38 @@
             <!-- <th scope="col">#</th> -->
             <th scope="col">First</th>
             <th scope="col">Last</th>
-            <th scope="col">Notes</th>
-            <th style="width: 10%"></th>
-            <th scope="col">Status</th>
+            <th scope="col">Email</th>
+            <th scope="col">Interviews</th>
+            <th scope="col">Created</th>
+
+            <!-- <th scope="col">Notes</th> -->
+            <th scope="col" style="width: 40%"> </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let candidate of candidates | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
             <td>{{ candidate.firstname }}</td>
             <td>{{ candidate.lastname }}</td>
-            <td>{{ (candidate.notes.length > 50) ?(candidate.notes | slice:0:50)+'...':candidate.notes }}</td>
-            <td style="width: 10%"> 
-              <div class="btn btn-info" [routerLink]="['/candidate/', candidate.candidate_id]">Assigned Questions</div>
-            </td>
-            <td style="width: 10%"> 
-              <div *ngIf="candidate.status == 'new'" class="btn btn-info">Send Interview</div>
-              <div *ngIf="candidate.status != 'new'" class="btn btn-secondary">{{candidate.status}}</div>
+            <td>{{candidate.email}}</td>
+            <td>{{candidate.interviews.length }}</td>
+            <td>{{candidate.created_ts | date}}</td>
+
+            <!-- <td>{{ (candidate.notes.length > 50) ?(candidate.notes | slice:0:50)+'...':candidate.notes }}</td> -->
+            <td> 
+              <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <button [disabled]='candidate.status != "new"' class="btn btn-info" [routerLink]="['/candidate/', candidate.candidate_id]">Questions [{{ candidate.questions.length }}]</button>
+                    <button class="btn btn-info" [routerLink]="['/edit-candidate/',candidate.candidate_id]">Edit</button>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <button *ngIf="candidate.status == 'new'" class="btn btn-info" 
+                            (click)="sendInterview(candidate)" 
+                            [disabled]='5 > candidate.questions.length'>Send Interview</button>
+                    <button *ngIf="candidate.status == 'hired'" class="btn btn-success" [disabled]='true'>{{candidate.status}}</button> 
+                    <button *ngIf="candidate.status == 'rejected'" class="btn btn-danger" [disabled]='true'>{{candidate.status}}</button> 
+                    <button *ngIf="candidate.status == 'pending'" class="btn btn-secondary" [disabled]='true'>{{candidate.status}}</button> 
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>

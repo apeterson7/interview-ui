@@ -1,0 +1,50 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="">
+        <tr>
+          <!-- <th scope="col">#</th> -->
+          <th scope="col"></th>
+          <th scope="col">Status</th>
+          <th scope="col">Candidate</th>
+          <th scope="col">Created</th>
+          <th scope="col"></th>
+
+          <!-- <th style="width: 10%"></th>
+          <th scope="col">Status</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let interview of interviews, let i = index" 
+        [class.table-success] = "interview.status == 'hired'" 
+        [class.table-danger] = "interview.status == 'rejected'" >
+          <td>{{ i+1 }}</td>
+          <td>{{ interview.status }}</td>
+          <td>{{ interview.candidate.firstname }} {{ interview.candidate.lastname }} </td>
+          <td>{{ interview.created_ts | date }} </td>
+
+          <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                  <button [routerLink]="['/interview/', interview.interview_id]" class="btn btn-info">Details</button>
+                  <button [disabled]="interview.status != 'new'" class="btn btn-info" (click)="hire(interview)">Hire</button>
+                  <button [disabled]="interview.status != 'new'" class="btn btn-info" (click)="reject(interview)">Reject</button>
+                </div>
+        </td>
+
+          <!-- <td style="width: 10%"> 
+            <div class="btn btn-info" [routerLink]="['/candidate/', candidate.candidate_id]">Assigned Questions</div>
+          </td>
+          <td style="width: 10%"> 
+            <div *ngIf="candidate.status == 'new'" class="btn btn-info">Send Interview</div>
+            <div *ngIf="candidate.status != 'new'" class="btn btn-secondary">{{candidate.status}}</div>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>  
+    <ngb-pagination
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [collectionSize]="interviews.length">
+  </ngb-pagination>    
+  </div>
+</div>

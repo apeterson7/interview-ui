@@ -22,14 +22,17 @@ export class CandidateFormComponent {
     // this.question.id=1;
   }
  
+  
   onSubmit() {
-    this.candidateService.save(this.candidate).subscribe(result => this.gotoUserList());
+    console.log(this.candidate);
+    this.candidate.status = 'new';
+    this.candidateService.save(this.candidate).subscribe(result => this.goToCandidate(result.candidate_id));
   }
  
   get diagnostic() { return JSON.stringify(this.candidate); }
 
-  gotoUserList() {
-    this.router.navigate(['/questions']);
+  goToCandidate(id:number) {
+    this.router.navigate(['/candidate/', id]);
   }
 
   

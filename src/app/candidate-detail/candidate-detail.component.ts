@@ -1,6 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Candidate } from '../model/candidate';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../model/question';
 import { QuestionService } from '../service/question-service.service';
 import { CandidateService } from '../service/candidate-service.service';
@@ -27,7 +26,6 @@ export class CandidateDetailComponent implements OnInit {
   public availableQuestions: Question[];
 
   constructor(private route: ActivatedRoute,
-    private router: Router, 
     public questionService: QuestionService, 
     public candidateService: CandidateService) { 
     
@@ -68,7 +66,6 @@ export class CandidateDetailComponent implements OnInit {
   close(){
     
   }
-
 
   ngOnInit() {
 

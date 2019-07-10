@@ -1,4 +1,5 @@
 import {Question} from '../model/question';
+import {Interview} from '../model/interview';
 
 export class Candidate {
     candidate_id: number;
@@ -10,4 +11,7 @@ export class Candidate {
     notes: string;
     status: string;
     questions: Question[];
+    interviews: Interview[];
+    created_ts: Date;
+    updated_ts: Date;
 }

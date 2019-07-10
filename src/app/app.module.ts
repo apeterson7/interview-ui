@@ -18,7 +18,10 @@ import {FileUploadModule} from 'ng2-file-upload';
 import { FileuploadComponent } from './fileupload/fileupload.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
-
+import { InterviewListComponent } from './interview-list/interview-list.component';
+import { InterviewDetailComponent } from './interview-detail/interview-detail.component';
+import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { CandidateFormComponent } from './candidate-form/candidate-form.componen
     LogoutComponent,
     FileuploadComponent,
     CandidateFormComponent,
+    InterviewListComponent,
+    InterviewDetailComponent,
+    UpdateCandidateComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +47,8 @@ import { CandidateFormComponent } from './candidate-form/candidate-form.componen
     FormsModule,
     NgbModule,
     FileUploadModule,
-    NgxFileDropModule
-
+    NgxFileDropModule,
+    BrowserAnimationsModule
   ],
   providers: [ QuestionService],
   bootstrap: [ AppComponent ],
