@@ -38,9 +38,9 @@ export class CandidateListComponent implements OnInit {
     })
   }
 
-  // onSelect(candidate: Candidate): void {
-  //   this.selectedCandidate = candidate;
-  // }
+  select(candidate: Candidate): void {
+    this.selectedCandidate = candidate;
+  }
 
   // open(candidate:Candidate) {
   //   const modalRef = this.modalService.open(CandidateDetailComponent, { size: 'lg' });

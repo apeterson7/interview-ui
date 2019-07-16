@@ -14,7 +14,7 @@ export class CandidateService{
   private candidateUrl: string;
 
   constructor(private http: HttpClient) {
-    this.candidateUrl = 'http://localhost:8080/api/candidates';
+    this.candidateUrl = 'http://localhost:8080/api';
   }
 
   public findAll(): Observable<Candidate[]> {
@@ -22,7 +22,7 @@ export class CandidateService{
     let password='password'
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<Candidate[]>( this.candidateUrl, {headers});
+    return this.http.get<Candidate[]>( this.candidateUrl+'/candidates', {headers});
   }
   
   public findById(id: number): Observable<Candidate> {
@@ -30,7 +30,7 @@ export class CandidateService{
     let password='password'
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<Candidate>( this.candidateUrl+'/'+id, {headers});
+    return this.http.get<Candidate>( this.candidateUrl+'/candidate/'+id, {headers});
   }
 
   public addQuestionsByCandidateId(questions:Question[] , id:number): Observable<Question[]> {
@@ -38,7 +38,7 @@ export class CandidateService{
     let password='password'
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.put<Question[]>(this.candidateUrl+'/'+id, questions, {headers});
+    return this.http.put<Question[]>(this.candidateUrl+'/candidate/'+id, questions, {headers});
   }
 
   public createInterviewForCandidateById(id:number): Observable<Candidate> {
@@ -48,7 +48,7 @@ export class CandidateService{
     const interview = new Interview();
 
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.put<Candidate>(this.candidateUrl+'/add-interview/'+id, interview, {headers});
+    return this.http.put<Candidate>(this.candidateUrl+'/candidate/add-interview/'+id, interview, {headers});
   }
 
   public save(candidate: Candidate){
@@ -56,7 +56,7 @@ export class CandidateService{
     let password='password'
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<Candidate>(this.candidateUrl, candidate, {headers})
+    return this.http.post<Candidate>(this.candidateUrl+'/candidates', candidate, {headers})
   }
 
   public update(candidate: Candidate){
@@ -66,6 +66,15 @@ export class CandidateService{
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     return this.http.put<Candidate>(this.candidateUrl, candidate, {headers})
   }
+
+  public updateStatus(id:number,status:number){
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.put<Candidate>(this.candidateUrl+'/candidate/'+id+'/status/'+status, null, {headers})
+  }
+
 
     /**
    * Handle Http operation that failed.

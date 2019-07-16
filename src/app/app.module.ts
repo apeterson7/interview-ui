@@ -22,6 +22,9 @@ import { InterviewListComponent } from './interview-list/interview-list.componen
 import { InterviewDetailComponent } from './interview-detail/interview-detail.component';
 import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { StartInterviewComponent } from './start-interview/start-interview.component';
+import { CandidateStatusPipe } from './pipes/candidate-status.pipe';
+import { InterviewStatusPipe } from './pipes/interview-status.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     InterviewListComponent,
     InterviewDetailComponent,
     UpdateCandidateComponent,
+    StartInterviewComponent,
+    CandidateStatusPipe,
+    InterviewStatusPipe
   ],
   imports: [
     BrowserModule,

@@ -36,12 +36,23 @@ export class InterviewService {
 
   
 
-  public saveInterview(interview:Interview){
+  // public update(interview:Interview){
+  //   let username='user'
+  //   let password='password'
+
+  //   interview.candidate.interviews = null;
+  
+  //   const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+  //   return this.http.put<Interview>(this.interviewUrl+'/interview',interview,{ headers });
+
+  // }
+
+  public updateStatus(id:string, candidateStatus:number){
     let username='user'
     let password='password'
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.put<Interview>(this.interviewUrl+'/interview',interview,{ headers });
+    return this.http.put<Interview>(this.interviewUrl+'/interview/'+id+'/status/'+candidateStatus,null,{ headers });
 
   }
 

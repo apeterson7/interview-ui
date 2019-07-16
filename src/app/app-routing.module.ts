@@ -13,6 +13,7 @@ import { CandidateFormComponent } from './candidate-form/candidate-form.componen
 import { InterviewListComponent } from './interview-list/interview-list.component';
 import { InterviewDetailComponent } from './interview-detail/interview-detail.component';
 import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
+import { StartInterviewComponent } from './start-interview/start-interview.component';
 
 const routes: Routes = [
   // { path: '', component: HomeComponent,canActivate:[AuthGuardService]},
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'addcandidate', component: CandidateFormComponent, canActivate:[AuthGuardService]},
   { path: 'interviews', component: InterviewListComponent, canActivate:[AuthGuardService]},
   { path: 'interview/:id', component: InterviewDetailComponent, canActivate:[AuthGuardService] },
-
+  { path: 'start-interview/:id', component: StartInterviewComponent, canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 

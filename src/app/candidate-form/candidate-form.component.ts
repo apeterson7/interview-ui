@@ -25,7 +25,7 @@ export class CandidateFormComponent {
   
   onSubmit() {
     console.log(this.candidate);
-    this.candidate.status = 'new';
+    this.candidate.status = 1;
     this.candidateService.save(this.candidate).subscribe(result => this.goToCandidate(result.candidate_id));
   }
  

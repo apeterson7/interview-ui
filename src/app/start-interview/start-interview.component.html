@@ -1,0 +1,37 @@
+<div class="card my-5">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6">
+        <h3>Candidate: {{ interview.candidate.firstname }} {{ interview.candidate.lastname }}</h3>
+      </div>
+      <div class="col-6">
+          <div class="alert alert-primary" role="alert">
+            Status: {{ interview.status }}
+          </div>
+        
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <p>ID: {{ interview.interview_id }}</p>
+      </div>
+    </div>
+
+    
+
+    <div class="card mb-3" *ngFor="let response of interview.responses">
+      <div class="card-header">
+        <b>Question:</b> {{ response.question.name }}
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ response.question.text }}</p>
+        <div class="form-group">
+          <textarea *ngIf="interview.status == 1" class="form-control" id="exampleFormControlTextarea1" rows="6" [(ngModel)]="response.response"></textarea>
+          <div *ngIf="!interview.status == 1" class="well"> {{response.response}}</div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-info" (click)="submit()">Submit</button>
+  </div>
+</div>

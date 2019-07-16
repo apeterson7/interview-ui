@@ -16,8 +16,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let interview of interviews, let i = index" 
-        [class.table-success] = "interview.status == 'hired'" 
-        [class.table-danger] = "interview.status == 'rejected'" >
+        [class.table-success] = "interview.candidate.status == 3" 
+        [class.table-danger] = "interview.candidate.status == 4" >
           <td>{{ i+1 }}</td>
           <td>{{ interview.status }}</td>
           <td>{{ interview.candidate.firstname }} {{ interview.candidate.lastname }} </td>
@@ -26,8 +26,9 @@
           <td>
               <div class="btn-group" role="group" aria-label="Basic example">
                   <button [routerLink]="['/interview/', interview.interview_id]" class="btn btn-info">Details</button>
-                  <button [disabled]="interview.status != 'new'" class="btn btn-info" (click)="hire(interview)">Hire</button>
-                  <button [disabled]="interview.status != 'new'" class="btn btn-info" (click)="reject(interview)">Reject</button>
+                  <button *ngIf=" interview.status == 1" class="btn btn-success" (click)="hire(interview)">Hire</button>
+                  <button *ngIf=" interview.status == 1" class="btn btn-danger" (click)="reject(interview)">Reject</button>
+                  <button *ngIf=" interview.status == 1" class="btn btn-secondary" (click)="release(interview)">Release</button>
                 </div>
           </td>
 

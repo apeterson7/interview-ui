@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Interview } from '../model/interview';
 import {InterviewService} from '../service/interview.service';
 import { CandidateService } from '../service/candidate-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-interview-list',
@@ -12,8 +14,9 @@ export class InterviewListComponent implements OnInit {
 
   constructor(
     private interviewService: InterviewService, 
-    private candidateService: CandidateService
+    private candidateService: CandidateService,
     // private modalService: NgbModal
+    private router: Router
     ) { }
 
   page = 1;
@@ -35,27 +38,80 @@ export class InterviewListComponent implements OnInit {
   }
 
   hire(interview: Interview){
-    interview.status = 'hired';
-    interview.candidate.status = 'hired';
-
-    this.interviewService.saveInterview(interview).subscribe(
-      interview => console.log(interview.status)
+    // //hired
+    // this.candidateService.updateStatus(interview.candidate.candidate_id,3).subscribe(
+    //   candidate => {
+    //     console.log(candidate)
+        
+        
+    //   }
+    // );
+  // finalized
+    this.interviewService.updateStatus(interview.interview_id,3).subscribe(
+      interview => {
+        console.log(interview)
+        this.router.navigate(['candidates'])
+      }
     );;
 
+    // interview.status = 3;
+    // interview.candidate.status = 3;
+    // //rejected
+    // this.interviewService.update(interview).subscribe(
+    //   candidate => {
+    //     console.log(candidate)
+    //   }
+    // );  
   }
 
   reject(interview: Interview){
-    interview.status = 'rejected';
-    interview.candidate.status = 'rejected';
-    
-    this.interviewService.saveInterview(interview).subscribe(
-        interview => console.log(interview.status)
-    );
+    // //rejected
+    // this.candidateService.updateStatus(interview.candidate.candidate_id,4).subscribe(
+    //   candidate => {
+    //     console.log(candidate)
+    //   }
+    // );  
+     //finalized
+     this.interviewService.updateStatus(interview.interview_id,4).subscribe(
+      interview => {
+        console.log(interview)
+        this.router.navigate(['candidates'])
+      }
+    ); 
+
+      // interview.status = 3;
+      // interview.candidate.status = 4;
+      // //rejected
+      // this.interviewService.update(interview).subscribe(
+      //   candidate => {
+      //     console.log(candidate)
+      //   }
+      // );  
   }
 
-  // open(interview:Interview) {
-  //   const modalRef = this.modalService.open(CandidateDetailComponent, { size: 'lg' });
-  //   modalRef.componentInstance.candidate = candidate;
-  // }
+  release(interview: Interview){
+    // //available
+    // this.candidateService.updateStatus(interview.candidate.candidate_id,1).subscribe(
+    //   candidate => {
+    //     console.log(candidate)
+    //   }
+    // ); 
+     //finalized
+     this.interviewService.updateStatus(interview.interview_id,1).subscribe(
+      interview => {
+        console.log(interview)
+        this.router.navigate(['candidates'])
+      }
+    );
+
+    // interview.status = 3;
+    // interview.candidate.status = 1;
+    // //rejected
+    // this.interviewService.update(interview).subscribe(
+    //   candidate => {
+    //     console.log(candidate)
+    //   }
+    // );  
+  }
 
 }

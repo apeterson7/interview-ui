@@ -9,7 +9,7 @@ export class Candidate {
     firstname: string;
     lastname: string;
     notes: string;
-    status: string;
+    status: number;
     questions: Question[];
     interviews: Interview[];
     created_ts: Date;

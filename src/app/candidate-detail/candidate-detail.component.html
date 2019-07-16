@@ -1,4 +1,4 @@
-<div *ngIf="candidate.status == 'new'">
+<div *ngIf="candidate.status == 1">
   <div class="card my-5">
     <div class="card-body">
       <div *ngIf="edits&&!saved" class="alert alert-primary" role="alert">
@@ -78,7 +78,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="candidate.status != 'new'">
+<div *ngIf="candidate.status != 1">
     <div class="card my-5">
       <div class="card-body">
         <h2 class='justify-content-center'>Interview In Progress</h2>
