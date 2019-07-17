@@ -4,7 +4,6 @@ import { Candidate } from '../model/candidate';
 import { CandidateDetailComponent} from '../candidate-detail/candidate-detail.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InterviewService } from '../service/interview.service';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, ActivatedRoute } from '@angular/router';
 
 

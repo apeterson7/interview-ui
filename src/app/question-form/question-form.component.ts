@@ -2,7 +2,6 @@ import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from '../service/question-service.service';
 import { Question } from '../model/question';
-
 import {FileUploader} from 'ng2-file-upload';
 import {FileService } from '../service/file.service';
 import {HttpResponse} from '@angular/common/http';
@@ -41,7 +40,7 @@ export class QuestionFormComponent {
 
   uploadedQuestions: Question[];
 
-  @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
  
   uploader: FileUploader;
   isDropOver: boolean;

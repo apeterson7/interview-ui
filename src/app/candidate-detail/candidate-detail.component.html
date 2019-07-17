@@ -4,90 +4,55 @@
       <div *ngIf="edits&&!saved" class="alert alert-primary" role="alert">
         Unsaved Changes
       </div>
-      <div *ngIf="saved&&!edits" class="alert alert-success" role="alert">
-        Saved &#10004;
+      <div *ngIf="saved&&!edits" class="alert alert-success" role="alert" style="line-height: 20px">
+        <i class="material-icons">save</i>
       </div>
       <div *ngIf="!edits&&!saved" class="alert alert-light" role="alert">
       </div>
-      <div class="container-fluid">
+      <h4>Questions assigned to {{candidate.firstname}}: </h4>
+      <span style="margin-bottom: 15px" class="btn btn-outline-primary"
+        (click)="saveAssignedQuestions(assignedQuestions)">Save
+        Changes</span>
 
         <div class="row">
-
-          <div class="col-sm-4">
-            <h4>Questions assigned to {{candidate.firstname}}: </h4>
-            <span style="margin-bottom: 15px" class="btn btn-outline-primary" (click)="saveAssignedQuestions(assignedQuestions)">Save
-              Changes</span>
-
-
-            <div class="table-responsive">
-              <table style="height: 500px" class="table table-bordered table-striped table-wrapper-scroll-y my-custom-scrollbar">
-                <thead class="thead">
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Level</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let question of assignedQuestions" [class.selected]="question === selectedQuestion">
-                    <td>{{ question.name }}</td>
-                    <td>{{ question.level }}</td>
-                    <td>
-                      <div class="btn btn-outline-danger btn-sm" (click)="assignedToAvailable(question)">Remove</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="col">
+            <div class="example-container">
+              <h2>Assigned Questions</h2>
+  
+              <div cdkDropList #assignedQuestionsList="cdkDropList" [cdkDropListData]="assignedQuestions"
+                [cdkDropListConnectedTo]="[availableQuestionsList]" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let question of assignedQuestions" cdkDrag>{{question.name}}</div>
+              </div>
             </div>
           </div>
 
-          <div class="col-sm-8">
-            <h4>Available Questions: </h4>
-            <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="availableQuestions.length">
-            </ngb-pagination>
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped">
-                <thead class="thead">
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Level</th>
-                    <th scope="col">Text</th>
-                    <th scope="col">Answer</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let question of availableQuestions | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"
-                    [class.selected]="question === selectedQuestion">
-                    <td>{{ question.name }}</td>
-                    <td>{{ question.type }}</td>
-                    <td>{{ question.level }}</td>
-                    <td>{{ (question.text.length > 10) ?(question.text | slice:0:10)+'...':question.text }}</td>
-                    <td>{{ (question.answer.length > 10) ? (question.answer | slice:0:10)+'...':question.answer }}</td>
-                    <td>
-                      <div class="btn btn-outline-success btn-sm" (click)="availableToAssigned(question)">Assign</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="col">
+            <div class="example-container">
+              <h2>Available</h2>
+  
+              <div cdkDropList #availableQuestionsList="cdkDropList" [cdkDropListData]="availableQuestions"
+                [cdkDropListConnectedTo]="[assignedQuestionsList]" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let question of availableQuestions" cdkDrag>{{question.name}}</div>
+              </div>
             </div>
+      
           </div>
-        </div>
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="candidate.status != 1">
+
+  <div *ngIf="candidate.status != 1">
     <div class="card my-5">
       <div class="card-body">
         <h2 class='justify-content-center'>Interview In Progress</h2>
       </div>
     </div>
-</div>
+  </div>
 
 
-<!-- <div>
+  <!-- <div>
    
     <button type="button" class="btn btn-outline-dark" 
     (click)="activeModal.close('Close click')">Close</button>

@@ -3,9 +3,8 @@ import { Candidate } from '../model/candidate';
 import { Question } from '../model/question';
 import { QuestionService } from '../service/question-service.service';
 import { CandidateService } from '../service/candidate-service.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-
+import { ActivatedRoute } from '@angular/router';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-candidate-detail',
@@ -22,8 +21,8 @@ export class CandidateDetailComponent implements OnInit {
   public saved;
   public edits;
 
-  public assignedQuestions: Question[];
-  public availableQuestions: Question[];
+  assignedQuestions: Question[];
+  availableQuestions: Question[];
 
   constructor(private route: ActivatedRoute,
     public questionService: QuestionService, 
@@ -98,5 +97,46 @@ export class CandidateDetailComponent implements OnInit {
 
     this.saved = false;
   }
+
+
+  // todo = [
+  //   'Get to work',
+  //   'Pick up groceries',
+  //   'Go home',
+  //   'Fall asleep'
+  // ];
+
+  // done = [
+  //   'Get up',
+  //   'Brush teeth',
+  //   'Take a shower',
+  //   'Check e-mail',
+  //   'Walk dog'
+  // ];
+
+  drop(event: CdkDragDrop<Question[]>) {
+
+    console.log(event.previousContainer);
+    console.log(event.container);
+
+    if (event.previousContainer === event.container) {
+      
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+      
+      if(!this.edits){
+        this.edits=true;
+        this.saved=false;
+      }
+    }
+  }
+
+
+
+
 
 }

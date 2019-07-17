@@ -17,11 +17,11 @@
             <h3 class="card-title text-center text-white py-3">{{ user }}</h3>
 
             <ul class="text-center list-inline py-3">
-              <li class="list-inline-item"><a routerLink="/questions" class="btn btn-info">List Questions</a></li>
-              <li class="list-inline-item"><a routerLink="/candidates" class="btn btn-info">List Candidates</a></li>
-              <li class="list-inline-item"><a routerLink="/interviews" class="btn btn-info">List Interviews</a></li>
-              <li class="list-inline-item"><a routerLink="/addquestions" class="btn btn-info">Add Question</a></li>
-              <li class="list-inline-item"><a routerLink="/addcandidate" class="btn btn-info">Add Candidate</a></li>
+              <li class="list-inline-item"><a [routerLinkActive]="['active']" routerLink="/questions" class="btn btn-info">List Questions</a></li>
+              <li class="list-inline-item"><a [routerLinkActive]="['active']" routerLink="/candidates" class="btn btn-info">List Candidates</a></li>
+              <li class="list-inline-item"><a [routerLinkActive]="['active']" routerLink="/interviews" class="btn btn-info">List Interviews</a></li>
+              <li class="list-inline-item"><a [routerLinkActive]="['active']" routerLink="/addquestions" class="btn btn-info">Add Question</a></li>
+              <li class="list-inline-item"><a [routerLinkActive]="['active']" routerLink="/addcandidate" class="btn btn-info">Add Candidate</a></li>
 
               <li class="list-inline-item"><a routerLink="/logout" class="btn btn-info">Logout</a></li>
             </ul>
