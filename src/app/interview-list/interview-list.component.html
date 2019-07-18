@@ -1,17 +1,54 @@
-<div class="card my-5">
+ 
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let interview of interviews | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+    <mat-expansion-panel-header class="right-aligned-header">
+      <mat-panel-title>
+        Interview: {{ interview.candidate.firstname }} {{ interview.candidate.lastname }}
+      </mat-panel-title>
+      <mat-panel-description>
+          {{ interview.created_ts | date }} Status: {{ interview.status | interviewStatus }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="well">{{ interview.candidate.notes }}</div>
+    <!-- <div class="btn-group" role="group" aria-label="Basic example">
+      <button [routerLink]="['/interview/', interview.interview_id]" class="btn btn-info">Details</button>
+      <button *ngIf=" interview.status == 1" class="btn btn-success" (click)="hire(interview)">Hire</button>
+      <button *ngIf=" interview.status == 1" class="btn btn-danger" (click)="reject(interview)">Reject</button>
+      <button *ngIf=" interview.status == 1" class="btn btn-secondary" (click)="release(interview)">Release</button>
+    </div> -->
+
+    <div class="example-button-row">
+        <button [routerLink]="['/interview/', interview.interview_id]" mat-stroked-button>Details</button>
+        <button *ngIf=" interview.status == 1" (click)="hire(interview)" mat-stroked-button>Hire</button>
+        <button *ngIf=" interview.status == 1" (click)="reject(interview)" mat-stroked-button>Reject</button>
+        <button *ngIf=" interview.status == 1" (click)="release(interview)" mat-stroked-button>Release</button>
+    </div>
+  </mat-expansion-panel>
+  
+</mat-accordion>
+
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="interviews.length">
+</ngb-pagination>   
+
+
+<!-- <div class="card my-5">
   <div class="card-body">
     <table class="table table-bordered table-striped">
       <thead class="">
         <tr>
-          <!-- <th scope="col">#</th> -->
+          <th scope="col">#</th>
           <th scope="col"></th>
           <th scope="col">Status</th>
           <th scope="col">Candidate</th>
           <th scope="col">Created</th>
           <th scope="col"></th>
 
-          <!-- <th style="width: 10%"></th>
-          <th scope="col">Status</th> -->
+          <th style="width: 10%"></th>
+          <th scope="col">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -32,13 +69,13 @@
                 </div>
           </td>
 
-          <!-- <td style="width: 10%"> 
+          <td style="width: 10%"> 
             <div class="btn btn-info" [routerLink]="['/candidate/', candidate.candidate_id]">Assigned Questions</div>
           </td>
           <td style="width: 10%"> 
             <div *ngIf="candidate.status == 'new'" class="btn btn-info">Send Interview</div>
             <div *ngIf="candidate.status != 'new'" class="btn btn-secondary">{{candidate.status}}</div>
-          </td> -->
+          </td>
         </tr>
       </tbody>
     </table>  
@@ -48,4 +85,4 @@
     [collectionSize]="interviews.length">
   </ngb-pagination>    
   </div>
-</div>
+</div> -->

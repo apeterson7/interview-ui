@@ -15,7 +15,7 @@ export class QuestionListComponent implements OnInit {
   selectedQuestion: Question;
 
   page = 1;
-  pageSize = 10;
+  pageSize = 5;
 
   constructor(private questionService: QuestionService, private modalService: NgbModal) { }
 

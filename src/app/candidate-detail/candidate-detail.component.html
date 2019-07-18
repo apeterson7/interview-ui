@@ -1,44 +1,53 @@
 <div *ngIf="candidate.status == 1">
   <div class="card my-5">
     <div class="card-body">
-      <div *ngIf="edits&&!saved" class="alert alert-primary" role="alert">
-        Unsaved Changes
-      </div>
-      <div *ngIf="saved&&!edits" class="alert alert-success" role="alert" style="line-height: 20px">
-        <i class="material-icons">save</i>
-      </div>
-      <div *ngIf="!edits&&!saved" class="alert alert-light" role="alert">
-      </div>
-      <h4>Questions assigned to {{candidate.firstname}}: </h4>
-      <span style="margin-bottom: 15px" class="btn btn-outline-primary"
-        (click)="saveAssignedQuestions(assignedQuestions)">Save
-        Changes</span>
 
-        <div class="row">
-          <div class="col">
-            <div class="example-container">
-              <h2>Assigned Questions</h2>
-  
-              <div cdkDropList #assignedQuestionsList="cdkDropList" [cdkDropListData]="assignedQuestions"
-                [cdkDropListConnectedTo]="[availableQuestionsList]" class="example-list"
-                (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let question of assignedQuestions" cdkDrag>{{question.name}}</div>
+
+      <div class="row">
+        <div class="col-12">
+            <div *ngIf="edits&&!saved" class="alert alert-primary" role="alert">
+                Unsaved Changes
               </div>
+              <div *ngIf="saved&&!edits" class="alert alert-success" role="alert" style="line-height: 20px">
+                <i class="material-icons">save</i>
+              </div>
+              <div *ngIf="!edits&&!saved" class="alert alert-light" role="alert">
+              </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-2">
+          <h3>{{candidate.firstname}} Questions </h3>
+          <button style="margin-bottom: 15px; position: -webkit-sticky;
+                  position: sticky;
+                  top: 2rem;"
+            class="btn btn-outline-primary clearfix float-left" (click)="saveAssignedQuestions(assignedQuestions)">Save
+            Changes</button>
+        </div>
+
+        <div class="col-5">
+          <div class="example-container">
+            <h4>Assigned</h4>
+
+            <div cdkDropList #assignedQuestionsList="cdkDropList" [cdkDropListData]="assignedQuestions"
+              [cdkDropListConnectedTo]="[availableQuestionsList]" class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let question of assignedQuestions" cdkDrag>{{question.name}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-5">
+          <div class="example-container">
+            <h4>Available</h4>
+
+            <div cdkDropList #availableQuestionsList="cdkDropList" [cdkDropListData]="availableQuestions"
+              [cdkDropListConnectedTo]="[assignedQuestionsList]" class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let question of availableQuestions" cdkDrag>{{question.name}}</div>
             </div>
           </div>
 
-          <div class="col">
-            <div class="example-container">
-              <h2>Available</h2>
-  
-              <div cdkDropList #availableQuestionsList="cdkDropList" [cdkDropListData]="availableQuestions"
-                [cdkDropListConnectedTo]="[assignedQuestionsList]" class="example-list"
-                (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let question of availableQuestions" cdkDrag>{{question.name}}</div>
-              </div>
-            </div>
-      
-          </div>
+        </div>
       </div>
     </div>
   </div>

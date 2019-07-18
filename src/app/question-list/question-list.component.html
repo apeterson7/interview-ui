@@ -1,4 +1,26 @@
-  <div class="card my-5">
+
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let question of questions | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+    <mat-expansion-panel-header class="right-aligned-header">
+      <mat-panel-title>
+        {{ question.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ question.level }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{ question.text }}</p>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="questions.length">
+</ngb-pagination>  
+
+<!-- <div class="card my-5">
     <div class="card-body">
         <div class="md-form">
             <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput>
@@ -7,7 +29,7 @@
       <table class="table table-bordered table-hover">
         <thead class="">
           <tr>
-            <!-- <th scope="col">#</th> -->
+            <th scope="col">#</th>
             <th scope="col" style="width: 25%">Name</th>
             <th scope="col" style="width: 10%">Type</th>
             <th scope="col" style="width: 10%">Level</th>
@@ -21,7 +43,7 @@
           <tr *ngFor="let question of questions | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index" 
           (click)="open(question)"
           scope="row">
-            <!-- <td>{{ question.id }}</td> -->
+            <td>{{ question.id }}</td>
             <td style="width: 25%">{{ question.name }}</td>
             <td style="width: 10%">{{ question.type }}</td>
             <td style="width: 10%">{{ question.level }}</td>
@@ -38,4 +60,4 @@
      
     </div>
     
-  </div>
+  </div> -->

@@ -3,7 +3,7 @@ import { Interview } from '../model/interview';
 import {InterviewService} from '../service/interview.service';
 import { CandidateService } from '../service/candidate-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { InterviewStatusPipe } from '../pipes/interview-status.pipe';
 
 @Component({
   selector: 'app-interview-list',

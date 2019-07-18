@@ -14,7 +14,7 @@ export class InterviewDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private interviewService: InterviewService, 
-    private candidateService: CandidateService,
+    // private candidateService: CandidateService,
   ) { }
 
   interview: Interview;

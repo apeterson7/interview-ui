@@ -12,9 +12,9 @@
     <div class="col-md-12">
       <div class="card bg-dark my-5">
         <div class="card-body">
-          <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
-            <div *ngIf="loginService.isUserLoggedIn()">
-            <h3 class="card-title text-center text-white py-3">{{ user }}</h3>
+          <h1 class="card-title text-center text-white py-3">{{ title }}</h1>
+            <!-- <div *ngIf="loginService.isUserLoggedIn()"> -->
+            <h4 class="card-title text-center text-white py-3">Welcome, {{ user }}</h4>
 
             <ul class="text-center list-inline py-3">
               <li class="list-inline-item"><a [routerLinkActive]="['active']" routerLink="/questions" class="btn btn-info">List Questions</a></li>
@@ -25,19 +25,19 @@
 
               <li class="list-inline-item"><a routerLink="/logout" class="btn btn-info">Logout</a></li>
             </ul>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
       <!-- <nav>
-              <a class="navbar-brand">Angular Router</a>
-              <ul class="nav navbar-nav justify-content-center" routerLinkActive="active">
-                  <li class="nav-item"><a routerLink="/questions" class="nav-link">List Questions</a></li>
-                  <li class="nav-item"><a routerLink="/candidates" class="nav-link">List Candidates</a></li>
-                  <li class="nav-item"><a routerLink="/interviews" class="nav-link">List Interviews</a></li>
-                  <li class="nav-item"><a routerLink="/addquestions" class="nav-link">Add Question</a></li>
-                  <li class="nav-item"><a routerLink="/addcandidate" class="nav-link">Add Candidate</a></li>
-                  <li class="nav-item"><a routerLink="/logout" class="nav-link">Logout</a></li>
-              </ul>
+        <a class="navbar-brand">Angular Router</a>
+        <ul class="nav navbar-nav justify-content-center" routerLinkActive="active">
+            <li class="nav-item"><a routerLink="/questions" class="nav-link">List Questions</a></li>
+            <li class="nav-item"><a routerLink="/candidates" class="nav-link">List Candidates</a></li>
+            <li class="nav-item"><a routerLink="/interviews" class="nav-link">List Interviews</a></li>
+            <li class="nav-item"><a routerLink="/addquestions" class="nav-link">Add Question</a></li>
+            <li class="nav-item"><a routerLink="/addcandidate" class="nav-link">Add Candidate</a></li>
+            <li class="nav-item"><a routerLink="/logout" class="nav-link">Logout</a></li>
+        </ul>
       </nav> -->
       <router-outlet></router-outlet>
     </div>

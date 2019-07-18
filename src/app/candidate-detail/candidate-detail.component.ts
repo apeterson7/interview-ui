@@ -5,6 +5,7 @@ import { QuestionService } from '../service/question-service.service';
 import { CandidateService } from '../service/candidate-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-candidate-detail',
@@ -24,45 +25,11 @@ export class CandidateDetailComponent implements OnInit {
   assignedQuestions: Question[];
   availableQuestions: Question[];
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     public questionService: QuestionService, 
-    public candidateService: CandidateService) { 
-    
-  }
-
-  availableToAssigned(question:Question) {
-    const index: number = this.availableQuestions.indexOf(question);
-    if (index !== -1) {
-        this.availableQuestions.splice(index, 1);
-        this.assignedQuestions.push(question);
-        this.saved=false;
-        this.edits=true;
-    }        
-  }
-
-  assignedToAvailable(question:Question){
-    const index: number = this.assignedQuestions.indexOf(question);
-    if (index !== -1) {
-        this.assignedQuestions.splice(index, 1);
-        this.availableQuestions.push(question);
-        this.saved=false;
-        this.edits=true;
-    }        
-  }
-
-  saveAssignedQuestions(questions:Question[]){
-    this.saved=true;
-    this.edits=false;
-    // console.log(questions, this.candidate.candidate_id);
-    this.candidateService.addQuestionsByCandidateId(questions, this.candidate.candidate_id).subscribe(
-      data => {
-        console.log(data);
-        this.candidate.questions = data;
-      }
-    );
-  }
-
-  close(){
+    public candidateService: CandidateService,
+    private _snackBar: MatSnackBar) { 
     
   }
 
@@ -98,21 +65,41 @@ export class CandidateDetailComponent implements OnInit {
     this.saved = false;
   }
 
+  // availableToAssigned(question:Question) {
+  //   const index: number = this.availableQuestions.indexOf(question);
+  //   if (index !== -1) {
+  //       this.availableQuestions.splice(index, 1);
+  //       this.assignedQuestions.push(question);
+  //       this.saved=false;
+  //       this.edits=true;
+  //   }        
+  // }
 
-  // todo = [
-  //   'Get to work',
-  //   'Pick up groceries',
-  //   'Go home',
-  //   'Fall asleep'
-  // ];
+  // assignedToAvailable(question:Question){
+  //   const index: number = this.assignedQuestions.indexOf(question);
+  //   if (index !== -1) {
+  //       this.assignedQuestions.splice(index, 1);
+  //       this.availableQuestions.push(question);
+  //       this.saved=false;
+  //       this.edits=true;
+  //   }        
+  // }
 
-  // done = [
-  //   'Get up',
-  //   'Brush teeth',
-  //   'Take a shower',
-  //   'Check e-mail',
-  //   'Walk dog'
-  // ];
+  saveAssignedQuestions(questions:Question[]){
+    this.saved=true;
+    this.edits=false;
+    // console.log(questions, this.candidate.candidate_id);
+    this.candidateService.addQuestionsByCandidateId(questions, this.candidate.candidate_id).subscribe(
+      data => {
+        console.log(data);
+        this.candidate.questions = data;
+        this._snackBar.openFromComponent(CandidateSaveAlertComponent, {
+          duration: 5000, //5 seconds
+        });
+      }
+    );
+  }
+
 
   drop(event: CdkDragDrop<Question[]>) {
 
@@ -134,9 +121,18 @@ export class CandidateDetailComponent implements OnInit {
       }
     }
   }
-
-
-
-
-
 }
+
+@Component({
+  selector: 'snack-bar-component-example-snack',
+  template: `<span class="example-pizza-party">
+              Pizza party!!! 🍕
+            </span>`,
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+  `],
+})
+export class CandidateSaveAlertComponent {}
+

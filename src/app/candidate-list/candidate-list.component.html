@@ -1,16 +1,59 @@
-<div class="card my-5">
+
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let candidate of candidates | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+    <mat-expansion-panel-header 
+    [class.rejected]="candidate.status == '4'" 
+    [class.hired]="candidate.status == '3'"
+    class="right-aligned-header">
+      <mat-panel-title>
+        {{ candidate.firstname }} {{ candidate.lastname }}
+      </mat-panel-title>
+      <mat-panel-description>
+        Interviews: {{candidate.interviews.length }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>Email: {{candidate.email}} Created: {{candidate.created_ts | date}}</p>
+    <p> {{ candidate.notes }}</p>
+    <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group mr-2" role="group" aria-label="Basic example">
+          <button *ngIf="candidate.status == '1'" class="btn btn-info" 
+                  (click)="sendInterview(candidate.candidate_id)" >Send Interview</button>
+          <button *ngIf="candidate.status != '1'" class="btn " 
+                [class.btn-success]="candidate.status == '3'" 
+                [class.btn-danger]="candidate.status == '4'" 
+                [class.btn-secondary]="candidate.status == '2'" 
+
+                [disabled]='true'>{{candidate.status | candidateStatus }}</button> 
+          <!-- <button *ngIf="candidate.status == '4'" class="btn btn-danger" [disabled]='true'>{{candidate.status}}</button> 
+          <button *ngIf="candidate.status == '2'" class="btn btn-secondary" [disabled]='true'>{{candidate.status }}</button>  -->
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Basic example">
+          <button *ngIf='candidate.status == 1' class="btn btn-info" [routerLink]="['/candidate/', candidate.candidate_id]">Assign Questions [{{ candidate.questions.length }}]</button>
+          <button class="btn btn-info" [routerLink]="['/edit-candidate/',candidate.candidate_id]">Edit</button>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="candidates.length">
+</ngb-pagination>  
+<!-- <div class="card my-5">
     <div class="card-body">
       <table class="table table-bordered table-hover">
         <thead class="">
           <tr>
-            <!-- <th scope="col">#</th> -->
+            <th scope="col">#</th>
             <th scope="col">First</th>
             <th scope="col">Last</th>
             <th scope="col">Email</th>
             <th scope="col">Interviews</th>
             <th scope="col">Created</th>
 
-            <!-- <th scope="col">Notes</th> -->
+            <th scope="col">Notes</th>
             <th scope="col" > </th>
           </tr>
         </thead>
@@ -22,7 +65,7 @@
             <td>{{candidate.interviews.length }}</td>
             <td>{{candidate.created_ts | date}}</td>
 
-            <!-- <td>{{ (candidate.notes.length > 50) ?(candidate.notes | slice:0:50)+'...':candidate.notes }}</td> -->
+            <td>{{ (candidate.notes.length > 50) ?(candidate.notes | slice:0:50)+'...':candidate.notes }}</td>
             <td> 
               <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="Basic example">
@@ -34,8 +77,8 @@
                           [class.btn-secondary]="candidate.status == '2'" 
 
                           [disabled]='true'>{{candidate.status | candidateStatus }}</button> 
-                    <!-- <button *ngIf="candidate.status == '4'" class="btn btn-danger" [disabled]='true'>{{candidate.status}}</button> 
-                    <button *ngIf="candidate.status == '2'" class="btn btn-secondary" [disabled]='true'>{{candidate.status }}</button>  -->
+                    <button *ngIf="candidate.status == '4'" class="btn btn-danger" [disabled]='true'>{{candidate.status}}</button> 
+                    <button *ngIf="candidate.status == '2'" class="btn btn-secondary" [disabled]='true'>{{candidate.status }}</button> 
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <button *ngIf='candidate.status == 1' class="btn btn-info" [routerLink]="['/candidate/', candidate.candidate_id]">Assign Questions [{{ candidate.questions.length }}]</button>
@@ -53,4 +96,4 @@
     </ngb-pagination>    
     </div>
   </div>
-  
+   -->

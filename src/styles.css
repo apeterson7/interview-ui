@@ -2,3 +2,25 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.pagination {
+    padding-top: 45px;
+    padding-bottom: 45px;
+
+}
+
+.mat-expansion-panel-header.rejected{
+    background: #DD868A;
+}
+.mat-expansion-panel-header.hired,
+.mat-expansion-panel-header.hired:hover {
+    background: #90C48E;
+}
+
+.right-aligned-header > .mat-content {
+    justify-content: space-between;
+}
+
+.mat-content > mat-panel-title, .mat-content > mat-panel-description {
+  flex: 0 0 auto;
+}
