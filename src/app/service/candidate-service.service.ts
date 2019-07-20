@@ -24,6 +24,14 @@ export class CandidateService{
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     return this.http.get<Candidate[]>( this.candidateUrl+'/candidates', {headers});
   }
+
+  public findAllByTag(tag: string): Observable<Candidate[]> {
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<Candidate[]>( this.candidateUrl+'/candidates/tag/'+tag, {headers});
+  }
   
   public findById(id: number): Observable<Candidate> {
     let username='user'
@@ -59,13 +67,13 @@ export class CandidateService{
     return this.http.post<Candidate>(this.candidateUrl+'/candidates', candidate, {headers})
   }
 
-  public update(candidate: Candidate){
-    let username='user'
-    let password='password'
+  // public update(candidate: Candidate){
+  //   let username='user'
+  //   let password='password'
   
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.put<Candidate>(this.candidateUrl, candidate, {headers})
-  }
+  //   const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+  //   return this.http.put<Candidate>(this.candidateUrl, candidate, {headers})
+  // }
 
   public updateStatus(id:number,status:number){
     let username='user'

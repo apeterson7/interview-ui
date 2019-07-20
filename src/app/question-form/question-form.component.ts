@@ -22,7 +22,6 @@ export class QuestionFormComponent {
  
   constructor(private route: ActivatedRoute, private router: Router, private questionService: QuestionService,private fileService: FileService) {
     this.question = new Question();
-    this.question.score=-1;
     // this.question.id=1;
   }
  

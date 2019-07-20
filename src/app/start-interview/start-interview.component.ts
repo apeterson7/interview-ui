@@ -13,8 +13,9 @@ export class StartInterviewComponent implements OnInit {
   
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private interviewService: InterviewService, 
-    // private responseService: ResponseService
+    private responseService: ResponseService
   ) { }
 
   interview: Interview;
@@ -35,16 +36,23 @@ export class StartInterviewComponent implements OnInit {
 
   submit(){
 
-    //change interview state to 2 - Pending Review
-    // this.interviewService.updateStatus(this.interview.interview_id, 2).subscribe(
-    //   result => {
-    //     console.log(result)
-    //     this.responseService.saveAll(this.interview.responses).subscribe(
-    //       result => console.log(result)
-    //     );  
-    //   }
-    // );
-
-     
+    // change interview state to 2 - Pending Review
+    this.interviewService.submitInterview(this.interview.interview_id).subscribe(
+      result => {
+        console.log(result)
+        this.responseService.saveAll(this.interview.responses).subscribe(
+          result => 
+          {
+            console.log(result);
+            this.interviewService.findById(this.interview.interview_id).subscribe(data =>
+              {
+                this.interview = data;
+                console.log(2);
+          
+              })
+          }
+        );  
+      }
+    );
   }
 }

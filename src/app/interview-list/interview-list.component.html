@@ -7,10 +7,34 @@
         Interview: {{ interview.candidate.firstname }} {{ interview.candidate.lastname }}
       </mat-panel-title>
       <mat-panel-description>
-          {{ interview.created_ts | date }} Status: {{ interview.status | interviewStatus }}
+          Created: {{ interview.created_ts | date:'short' }}  |  Status: {{ interview.status | interviewStatus }}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <div class="well">{{ interview.candidate.notes }}</div>
+
+    <mat-list>
+        <mat-list-item>
+            Notes: {{ interview.candidate.notes }}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            Last Action Taken: {{ interview.updated_ts | date:'short'}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            Average Score: {{ interview.responses | avgResponseScore }}/5
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item>
+          <div class="example-button-row">
+            <button [routerLink]="['/interview/', interview.interview_id]" mat-stroked-button>Review</button>
+            <button *ngIf=" interview.status == 2" (click)="hire(interview)" mat-stroked-button>Hire</button>
+            <button *ngIf=" interview.status == 2" (click)="reject(interview)" mat-stroked-button>Reject</button>
+            <button *ngIf=" interview.status == 2" (click)="release(interview)" mat-stroked-button>Release</button>
+        </div>
+      </mat-list-item>  
+    </mat-list>
+   
     <!-- <div class="btn-group" role="group" aria-label="Basic example">
       <button [routerLink]="['/interview/', interview.interview_id]" class="btn btn-info">Details</button>
       <button *ngIf=" interview.status == 1" class="btn btn-success" (click)="hire(interview)">Hire</button>
@@ -18,12 +42,7 @@
       <button *ngIf=" interview.status == 1" class="btn btn-secondary" (click)="release(interview)">Release</button>
     </div> -->
 
-    <div class="example-button-row">
-        <button [routerLink]="['/interview/', interview.interview_id]" mat-stroked-button>Details</button>
-        <button *ngIf=" interview.status == 1" (click)="hire(interview)" mat-stroked-button>Hire</button>
-        <button *ngIf=" interview.status == 1" (click)="reject(interview)" mat-stroked-button>Reject</button>
-        <button *ngIf=" interview.status == 1" (click)="release(interview)" mat-stroked-button>Release</button>
-    </div>
+    
   </mat-expansion-panel>
   
 </mat-accordion>

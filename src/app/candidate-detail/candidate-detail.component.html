@@ -17,36 +17,48 @@
       </div>
 
       <div class="row">
-        <div class="col-2">
-          <h3>{{candidate.firstname}} Questions </h3>
-          <button style="margin-bottom: 15px; position: -webkit-sticky;
+          <h3 style="margin-left:15px; margin-bottom:30px"> {{candidate.firstname}} {{candidate.lastname}}'s Questions </h3>
+          <br> 
+      </div>
+      <div class="row">
+        <div class="col-2">          
+          <button style="margin-bottom: 15px; 
+                  position: -webkit-sticky;
                   position: sticky;
                   top: 2rem;"
-            class="btn btn-outline-primary clearfix float-left" (click)="saveAssignedQuestions(assignedQuestions)">Save
-            Changes</button>
+                  class="btn btn-outline-primary clearfix float-left" 
+                  (click)="saveAssignedQuestions(assignedQuestions)">
+              Save Changes
+          </button>
         </div>
 
         <div class="col-5">
-          <div class="example-container">
+          <div style="width:100%" class="example-container">
             <h4>Assigned</h4>
 
-            <div cdkDropList #assignedQuestionsList="cdkDropList" [cdkDropListData]="assignedQuestions"
-              [cdkDropListConnectedTo]="[availableQuestionsList]" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div style="margin-bottom: 15px; 
+                      position: -webkit-sticky;
+                      position: sticky;
+                      top: 2rem; width:100%;"
+                  cdkDropList #assignedQuestionsList="cdkDropList" 
+                  [cdkDropListData]="assignedQuestions"
+                  [cdkDropListConnectedTo]="[availableQuestionsList]" 
+                  class="example-list clearfix float-left" 
+                  (cdkDropListDropped)="drop($event)">
               <div class="example-box" *ngFor="let question of assignedQuestions" cdkDrag>{{question.name}}</div>
             </div>
           </div>
         </div>
 
         <div class="col-5">
-          <div class="example-container">
+          <div style="width:100%" class="example-container">
             <h4>Available</h4>
 
-            <div cdkDropList #availableQuestionsList="cdkDropList" [cdkDropListData]="availableQuestions"
+            <div style="width:100%" cdkDropList #availableQuestionsList="cdkDropList" [cdkDropListData]="availableQuestions"
               [cdkDropListConnectedTo]="[assignedQuestionsList]" class="example-list" (cdkDropListDropped)="drop($event)">
               <div class="example-box" *ngFor="let question of availableQuestions" cdkDrag>{{question.name}}</div>
             </div>
           </div>
-
         </div>
       </div>
     </div>

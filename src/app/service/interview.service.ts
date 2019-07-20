@@ -53,7 +53,15 @@ export class InterviewService {
   
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     return this.http.put<Interview>(this.interviewUrl+'/interview/'+id+'/status/'+candidateStatus,null,{ headers });
+  }
 
+  public submitInterview(id:string){
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.put<Interview>(this.interviewUrl+'/submit-interview/'+id,null,{ headers });
+ 
   }
 
   // public save(interview: Interview) {

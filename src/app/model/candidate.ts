@@ -14,4 +14,5 @@ export class Candidate {
     interviews: Interview[];
     created_ts: Date;
     updated_ts: Date;
+    tags: string[];
 }

@@ -5,7 +5,6 @@ import { QuestionFormComponent } from './question-form/question-form.component';
 import { QuestionDetailComponent } from './question-detail/question-detail.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
 import { CandidateDetailComponent } from './candidate-detail/candidate-detail.component';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthGuardService } from './service/auth-guard.service';
@@ -14,6 +13,7 @@ import { InterviewListComponent } from './interview-list/interview-list.componen
 import { InterviewDetailComponent } from './interview-detail/interview-detail.component';
 import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
 import { StartInterviewComponent } from './start-interview/start-interview.component';
+import { CandidatesForTagComponent } from './candidates-for-tag/candidates-for-tag.component';
 
 const routes: Routes = [
   // { path: '', component: HomeComponent,canActivate:[AuthGuardService]},
@@ -29,7 +29,8 @@ const routes: Routes = [
   { path: 'addcandidate', component: CandidateFormComponent, canActivate:[AuthGuardService]},
   { path: 'interviews', component: InterviewListComponent, canActivate:[AuthGuardService]},
   { path: 'interview/:id', component: InterviewDetailComponent, canActivate:[AuthGuardService] },
-  { path: 'start-interview/:id', component: StartInterviewComponent, canActivate: [AuthGuardService] },
+  { path: 'start-interview/:id', component: StartInterviewComponent },
+  { path: 'candidates/tag/:id', component: CandidatesForTagComponent, canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 

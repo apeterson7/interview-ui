@@ -8,18 +8,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'app-candidate-list',
-  templateUrl: './candidate-list.component.html',
-  styleUrls: ['./candidate-list.component.css']
+  selector: 'app-candidates-for-tag',
+  templateUrl: './candidates-for-tag.component.html',
+  styleUrls: ['./candidates-for-tag.component.css']
 })
-export class CandidateListComponent implements OnInit {
-
-
+export class CandidatesForTagComponent implements OnInit {
   constructor(
     private candidateService: CandidateService, 
     private modalService: NgbModal,
     private interviewService: InterviewService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) 
   { }
 
@@ -30,13 +29,16 @@ export class CandidateListComponent implements OnInit {
   selectedCandidate: Candidate;
 
   ngOnInit() {
-    this.candidateService.findAll().subscribe(data =>{
+    console.log("CANDIDATE TAG")
+    let tag = this.route.snapshot.paramMap.get('id');
+
+    this.candidateService.findAllByTag(tag).subscribe(data =>{
       this.candidates = data;
       console.log(this.candidates);
 
     })
   }
-  
+
   sendInterview(id:number){
     console.log(id);
     this.candidateService.createInterviewForCandidateById(id).subscribe(
@@ -45,5 +47,13 @@ export class CandidateListComponent implements OnInit {
         this.router.navigate(['interviews'])
       }
     );
+  }
+
+  findCandidatesByTag(tag:string){
+    this.candidateService.findAllByTag(tag).subscribe(data =>{
+      this.candidates = data;
+      console.log(this.candidates);
+
+    })
   }
 }

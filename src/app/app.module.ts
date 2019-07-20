@@ -27,12 +27,23 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {ActivatedRoute} from '@angular/router';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatTableDataSource } from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSliderModule} from '@angular/material/slider';
+import { AvgResponseScorePipe } from './pipes/avg-response-score.pipe';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import { CandidatesForTagComponent } from './candidates-for-tag/candidates-for-tag.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +64,9 @@ import { BrowserModule } from '@angular/platform-browser';
     StartInterviewComponent,
     CandidateStatusPipe,
     InterviewStatusPipe,
-    CandidateSaveAlertComponent
+    CandidateSaveAlertComponent,
+    AvgResponseScorePipe,
+    CandidatesForTagComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +81,16 @@ import { BrowserModule } from '@angular/platform-browser';
     MatExpansionModule,
     MatSnackBarModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSliderModule,
+    MatChipsModule,
+    MatIconModule
   ],
   providers: [ QuestionService],
   bootstrap: [ AppComponent ],

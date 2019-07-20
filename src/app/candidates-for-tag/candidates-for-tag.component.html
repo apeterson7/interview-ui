@@ -1,0 +1,60 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let candidate of candidates | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+        <mat-expansion-panel-header [class.rejected]="candidate.status == '4'" [class.hired]="candidate.status == '3'"
+            class="right-aligned-header" style="height:70px; padding-top: auto; padding-bottom:auto;">
+            <mat-panel-title>
+                {{ candidate.firstname }} {{ candidate.lastname }}
+
+                <!-- <p *ngFor="let tag of candidate.tags">{{ tag }}</p> -->
+            </mat-panel-title>
+            <mat-panel-description>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let tag of candidate.tags" (click)="findCandidatesByTag(tag)">{{ tag }}</mat-chip>
+                </mat-chip-list>
+                <div style="margin-left: 10px">
+                    Interviews: {{candidate.interviews.length }}
+                </div>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+            <mat-list-item>
+                Email: {{candidate.email}} Created: {{candidate.created_ts | date}}
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                Notes: {{ candidate.notes }}
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                Last Updated: {{ candidate.updated_ts | date:'short'}}
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                        <button *ngIf="candidate.status == '1'" class="btn btn-info" (click)="sendInterview(candidate.candidate_id)">Send
+                            Interview</button>
+                        <button *ngIf="candidate.status != '1'" class="btn " [class.btn-success]="candidate.status == '3'"
+                            [class.btn-danger]="candidate.status == '4'" [class.btn-secondary]="candidate.status == '2'"
+                            [disabled]='true'>{{candidate.status
+                            | candidateStatus }}</button>
+                        <!-- <button *ngIf="candidate.status == '4'" class="btn btn-danger" [disabled]='true'>{{candidate.status}}</button> 
+                          <button *ngIf="candidate.status == '2'" class="btn btn-secondary" [disabled]='true'>{{candidate.status }}</button>  -->
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                        <button *ngIf='candidate.status == 1' class="btn btn-info" [routerLink]="['/candidate/', candidate.candidate_id]">
+                            Assign Questions [{{ candidate.questions.length }}]
+                        </button>
+                        <button class="btn btn-info" [routerLink]="['/edit-candidate/',candidate.candidate_id]">
+                            Edit
+                        </button>
+                    </div>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="candidates.length">
+</ngb-pagination>

@@ -9,9 +9,13 @@
         <div *ngIf="interview.status == 1" class="alert alert-primary" role="alert">
           Status: New
         </div>
-        <div *ngIf="interview.status == 2" class="alert alert-primary" role="alert">
-          Status: Pending Review
-          </div>
+        <div *ngIf="interview.status == 2">
+            <div  class="alert alert-primary" role="alert">
+                Status: Pending Review
+              </div>
+              <span>{{ interview.responses | avgResponseScore }}</span>
+        </div>
+     
         <div *ngIf="interview.status == 3" class="alert alert-success" role="alert">
           Status: Finalized
         </div>
@@ -34,14 +38,43 @@
           <p class="card-text">{{ response.question.text }}</p>
       </div>
     </div> -->
-    <mat-card style="margin-bottom: 15px" class="example-card" *ngFor="let response of interview.responses">
+    <mat-card style="margin-bottom: 15px" class="example-card" *ngFor="let response of interview.responses; let i = index">
         <mat-card-header>
           <!-- <div mat-card-avatar class="example-header-image"></div> -->
-          <mat-card-title>Question </mat-card-title>
+          <mat-card-title>Question {{i}} </mat-card-title>
           <mat-card-subtitle>{{ response.question.name }}  |  Level {{ response.question.level }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <p >{{ response.question.text }}</p>
+            <mat-list>
+                <mat-list-item>
+                    Question: {{ response.question.text }}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item *ngIf="interview.status != 1">
+                    Response: {{ response.response }}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item *ngIf="interview.status == 2">
+                  <div>
+                      Score: {{ response.score }}
+                  </div>
+                      
+                  <div style="width:25%; margin-left:30px">
+                    <mat-slider
+                      style="width:100%"
+                      class="example-margin"
+                      [max]="5"
+                      [min]="0"
+                      [step]="1"
+                      [thumbLabel]=true
+                      [tickInterval]="tickInterval"
+                      [(ngModel)]="response.score"
+                      [vertical]="vertical">
+                    </mat-slider>
+                  </div>
+                  
+              </mat-list-item>
+            </mat-list>
         </mat-card-content>
     </mat-card>
   </div>

@@ -65,26 +65,6 @@ export class CandidateDetailComponent implements OnInit {
     this.saved = false;
   }
 
-  // availableToAssigned(question:Question) {
-  //   const index: number = this.availableQuestions.indexOf(question);
-  //   if (index !== -1) {
-  //       this.availableQuestions.splice(index, 1);
-  //       this.assignedQuestions.push(question);
-  //       this.saved=false;
-  //       this.edits=true;
-  //   }        
-  // }
-
-  // assignedToAvailable(question:Question){
-  //   const index: number = this.assignedQuestions.indexOf(question);
-  //   if (index !== -1) {
-  //       this.assignedQuestions.splice(index, 1);
-  //       this.availableQuestions.push(question);
-  //       this.saved=false;
-  //       this.edits=true;
-  //   }        
-  // }
-
   saveAssignedQuestions(questions:Question[]){
     this.saved=true;
     this.edits=false;
@@ -120,6 +100,16 @@ export class CandidateDetailComponent implements OnInit {
         this.saved=false;
       }
     }
+  }
+
+  ngOnDestroy(){
+    this.candidateService.addQuestionsByCandidateId(this.assignedQuestions, this.candidate.candidate_id).subscribe(
+      data => {
+        console.log(data);
+        console.log('data saved');
+      }
+    );
+
   }
 }
 
