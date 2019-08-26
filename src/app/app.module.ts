@@ -31,7 +31,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatTableDataSource } from '@angular/material/table';
@@ -43,7 +43,8 @@ import { MatSliderModule} from '@angular/material/slider';
 import { AvgResponseScorePipe } from './pipes/avg-response-score.pipe';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
-import { CandidatesForTagComponent } from './candidates-for-tag/candidates-for-tag.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 @NgModule({
   declarations: [
@@ -65,8 +66,7 @@ import { CandidatesForTagComponent } from './candidates-for-tag/candidates-for-t
     CandidateStatusPipe,
     InterviewStatusPipe,
     CandidateSaveAlertComponent,
-    AvgResponseScorePipe,
-    CandidatesForTagComponent
+    AvgResponseScorePipe
   ],
   imports: [
     BrowserModule,
@@ -90,7 +90,9 @@ import { CandidatesForTagComponent } from './candidates-for-tag/candidates-for-t
     MatPaginatorModule,
     MatSliderModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [ QuestionService],
   bootstrap: [ AppComponent ],

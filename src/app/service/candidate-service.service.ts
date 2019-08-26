@@ -32,6 +32,22 @@ export class CandidateService{
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     return this.http.get<Candidate[]>( this.candidateUrl+'/candidates/tag/'+tag, {headers});
   }
+
+  public findAllByTags(tags: string[]): Observable<Candidate[]> {
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    let url = this.candidateUrl+'/candidates/tags?';
+    
+    for(let tag of tags){ 
+      url= url+'tag='+tag+'&';
+    }
+
+    console.log(url);
+
+    return this.http.get<Candidate[]>( url, {headers});
+  }
   
   public findById(id: number): Observable<Candidate> {
     let username='user'
@@ -83,6 +99,14 @@ export class CandidateService{
     return this.http.put<Candidate>(this.candidateUrl+'/candidate/'+id+'/status/'+status, null, {headers})
   }
 
+  public getTags(){
+    let username='user'
+    let password='password'
+  
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<string[]>(this.candidateUrl+'/candidates/tags/all', {headers})
+
+  }
 
     /**
    * Handle Http operation that failed.

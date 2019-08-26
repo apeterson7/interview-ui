@@ -2,3 +2,8 @@ table tr.highlight {
     background-color: #4CAF50 !important;
     color: #ffffff;
 }
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}

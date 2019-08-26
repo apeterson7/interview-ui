@@ -77,7 +77,6 @@ export class UpdateCandidateComponent implements OnInit {
 
   save(){
     // this.candidateService.update(this.candidate).subscribe(result => this.goToCandidate(result.candidate_id));
-
     
     this.candidateService.save(this.candidate).subscribe(data =>
       {
