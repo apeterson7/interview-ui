@@ -72,7 +72,8 @@ export class CandidateListComponent implements OnInit {
       })
     }
   }
-  
+
+
   /**
    * If clicked, method to add tags found in candidate list to SelectedTags
    * @param tag 
@@ -135,6 +136,10 @@ export class CandidateListComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.availableTags.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
   }
+
+  getResumeUrl(candidate:Candidate): string{
+    return "https://s3.us-east-2.amazonaws.com/resume-finra/"+candidate.candidate_id+"/"+candidate.resume;
+  }  
 
   sendInterview(id:number){
     console.log(id);

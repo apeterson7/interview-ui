@@ -1,25 +1,30 @@
-<mat-form-field ng-show="selectedTags.length != 0" class="example-chip-list" style = "width:100%">
-    <mat-chip-list #chipList aria-label="Tags">
-      <mat-chip *ngFor="let tag of selectedTags" [selectable]="selectable"
-               [removable]="removable" (removed)="removeTag(tag)">
-        {{tag}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-      <input placeholder="Search by tag..."
-            #tagInput
-            [formControl]="tagCtrl"
-            [matAutocomplete]="auto"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)">
-    </mat-chip-list>
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-        {{tag}}
-      </mat-option>
-    </mat-autocomplete>
-</mat-form-field>
+<form class="example-form">
+    <mat-form-field style = "width:50%">
+        <input matInput placeholder="Search by name">
+      </mat-form-field>
+  <mat-form-field ng-show="selectedTags.length != 0" class="example-chip-list" style = "width:50%">
+      <mat-chip-list #chipList aria-label="Tags">
+        <mat-chip *ngFor="let tag of selectedTags" [selectable]="selectable"
+                [removable]="removable" (removed)="removeTag(tag)">
+          {{tag}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Search by tag"
+              #tagInput
+              [formControl]="tagCtrl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+          {{tag}}
+        </mat-option>
+      </mat-autocomplete>
+  </mat-form-field>
+</form>
 
 <mat-accordion>
   <mat-expansion-panel *ngFor="let candidate of candidates | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
@@ -56,18 +61,23 @@
       <mat-divider></mat-divider>
       <mat-list-item>
           <div class="example-button-row">
-              <button *ngIf="candidate.status == '1'" mat-stroked-button (click)="sendInterview(candidate.candidate_id)">Send
-                  Interview</button>
-                <button *ngIf="candidate.status != '1'" mat-stroked-button [disabled]='true'>{{candidate.status
-                  | candidateStatus }}</button>
-                <button *ngIf='candidate.status == 1' mat-stroked-button [routerLink]="['/candidate/', candidate.candidate_id]">
-                  Assign Questions [{{ candidate.questions.length }}]
-                </button>
-                <button mat-stroked-button [routerLink]="['/edit-candidate/',candidate.candidate_id]">
-                  Edit
-                </button>
+            <button *ngIf="candidate.status == '1'" [disabled]="candidate.questions.length == 0" mat-stroked-button (click)="sendInterview(candidate.candidate_id)">
+              Send Interview
+            </button>
+            <button *ngIf="candidate.status != '1'" mat-stroked-button [disabled]='true'>{{candidate.status
+              | candidateStatus }}</button>
+            <button *ngIf='candidate.status == 1' mat-stroked-button [routerLink]="['/candidate/', candidate.candidate_id]">
+              Assign Questions [{{ candidate.questions.length }}]
+            </button>
+            <button mat-stroked-button [routerLink]="['/edit-candidate/',candidate.candidate_id]">
+              Edit
+            </button>
+            <a *ngIf='candidate.resume != null' href="{{getResumeUrl(candidate)}}" target="_blank"> 
+              <button mat-stroked-button>
+                View Resume
+              </button>
+            </a>
           </div>
-
         <!-- <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
           
           <div class="btn-group mr-2" role="group" aria-label="Basic example">
@@ -96,5 +106,5 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="candidates.length">
+<ngb-pagination *ngIf="candidates.length >0" [(page)]="page" [pageSize]="pageSize" [collectionSize]="candidates.length">
 </ngb-pagination>

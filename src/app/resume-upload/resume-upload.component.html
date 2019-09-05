@@ -1,0 +1,31 @@
+<div class="center">
+    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          Import or drag resumé file here for {{candidate_id}}
+          <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
+        </ng-template>
+    </ngx-file-drop>
+    <div *ngFor="let item of files; let i=index">
+      <div class="card-body rounded border" style="margin:10px"> 
+          <strong>{{ item.relativePath }} loaded </strong>
+      </div> 
+    </div>
+   
+  </div>
+
+  <div *ngIf="isError" class="alert alert-danger" role="alert">
+    {{ errorMsg }}
+  </div>
+  
+  <div *ngIf="isSuccess" class="alert alert-success" role="alert">
+    Questions Saved
+  </div>
+  
+  <div *ngIf="isLoading">
+      <div class="d-flex justify-content-center">
+          <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+      </div>
+  </div>

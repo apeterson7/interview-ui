@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './service/authentication.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -10,9 +11,16 @@ import { AuthenticationService } from './service/authentication.service';
 export class AppComponent  {
   title = 'Interview';
   user;
-
-  constructor(private loginService:AuthenticationService)  {
+  greeting = {};
+  
+  constructor(private loginService:AuthenticationService, private http: HttpClient)  {
     this.user = loginService.getUser();
+    // let username='admin'
+    // let password='admin123'
+  
+    // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    // http.get('http://localhost:8080/resource').subscribe(data => this.greeting = data);
+
   }
 
 }

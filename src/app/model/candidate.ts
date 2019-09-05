@@ -15,4 +15,5 @@ export class Candidate {
     created_ts: Date;
     updated_ts: Date;
     tags: string[];
+    resume: string;
 }

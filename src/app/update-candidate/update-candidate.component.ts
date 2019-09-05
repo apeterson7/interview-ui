@@ -16,18 +16,19 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 })
 export class UpdateCandidateComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    public candidateService: CandidateService) { 
-  }
-
   public candidate:Candidate;
   // private saved:Boolean;
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
+  resumeUrl = "";
 
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    public candidateService: CandidateService) { 
+      
+  }
 
   ngOnInit() {
     // this.candidate = this.route.paramMap.pipe(
@@ -42,6 +43,7 @@ export class UpdateCandidateComponent implements OnInit {
     {
       this.candidate = data;
       console.log(this.candidate)
+      this.resumeUrl = 'https://s3.us-east-2.amazonaws.com/resume-finra/'+this.candidate.candidate_id+'/'+this.candidate.resume;
     })
 
     // this.candidate.

@@ -47,7 +47,14 @@
                    (matChipInputTokenEnd)="add($event)">
           </mat-chip-list>
         </mat-form-field>
-      <br>
+        <app-resume-upload *ngIf="candidate.resume == null" [candidate_id]='candidate.candidate_id'></app-resume-upload>
+        <a *ngIf='candidate.resume != null' href="{{this.resumeUrl}}" target="_blank">
+            <button mat-stroked-button>
+              View Resume
+            </button>
+          </a>
+        <br>
+        <br>
       <button class="btn btn-info" (click)="save()">Save</button>
       <br>
   

@@ -46,8 +46,11 @@
   </mat-expansion-panel>
   
 </mat-accordion>
-
+<h1 *ngIf="interviews.length == 0">
+  No Interviews Available
+</h1>
 <ngb-pagination
+  *ngIf="interviews.length > 0"
   [(page)]="page"
   [pageSize]="pageSize"
   [collectionSize]="interviews.length">

@@ -44,6 +44,7 @@ import { AvgResponseScorePipe } from './pipes/avg-response-score.pipe';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ResumeUploadComponent } from './resume-upload/resume-upload.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     CandidateStatusPipe,
     InterviewStatusPipe,
     CandidateSaveAlertComponent,
-    AvgResponseScorePipe
+    AvgResponseScorePipe,
+    ResumeUploadComponent
   ],
   imports: [
     BrowserModule,

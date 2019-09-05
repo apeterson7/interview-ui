@@ -22,6 +22,18 @@ export class FileService {
     
    }
 
+   uploadResumeFile(file: File, candidate_id: string): Observable<HttpEvent<{}>> {
+		const formdata: FormData = new FormData();
+		formdata.append('file', file);
+		const req = new HttpRequest('POST', 'http://localhost:8080/api/resume/uploadResume/'+candidate_id, formdata, {
+			  reportProgress: true,
+			  responseType: 'text'
+		});
+	
+    return this.http.request(req);
+    
+   }
+
    uploadQuestionFile(file: File): Observable<Question[]> {
 		const formdata: FormData = new FormData();
     formdata.append('file', file);
